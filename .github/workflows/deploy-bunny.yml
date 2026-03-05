@@ -1,0 +1,49 @@
+name: Deploy static site to Bunny
+
+on:
+  push:
+    branches:
+      - main
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Deploy to Bunny Storage
+        env:
+          BUNNY_API_KEY: ${{ secrets.BUNNY_API_KEY }}
+          BUNNY_STORAGE_ZONE: ${{ secrets.BUNNY_STORAGE_ZONE }}
+          BUNNY_STORAGE_REGION: ${{ secrets.BUNNY_STORAGE_REGION }}
+        run: |
+          if [ -z "$BUNNY_API_KEY" ] || [ -z "$BUNNY_STORAGE_ZONE" ]; then
+            echo "BUNNY_API_KEY and BUNNY_STORAGE_ZONE secrets must be set."
+            exit 1
+          fi
+
+          # Default region endpoint (set BUNNY_STORAGE_REGION to e.g. 'ny' if needed)
+          if [ -z "$BUNNY_STORAGE_REGION" ] || [ "$BUNNY_STORAGE_REGION" = "global" ]; then
+            BASE_URL="https://storage.bunnycdn.com/${BUNNY_STORAGE_ZONE}"
+          else
+            BASE_URL="https://${BUNNY_STORAGE_REGION}.storage.bunnycdn.com/${BUNNY_STORAGE_ZONE}"
+          fi
+
+          echo "Uploading static files to $BASE_URL"
+
+          # Upload all files except git metadata and CI config
+          FILES=$(find . -type f ! -path "./.git/*" ! -path "./.github/*")
+
+          for FILE in $FILES; do
+            REL_PATH="${FILE#./}"
+            TARGET_URL="${BASE_URL}/${REL_PATH}"
+
+            echo "PUT ${REL_PATH}"
+            curl -sS -X PUT "$TARGET_URL" \
+              -H "AccessKey: $BUNNY_API_KEY" \
+              --upload-file "$FILE"
+          done
+
