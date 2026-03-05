@@ -42,8 +42,13 @@ jobs:
             TARGET_URL="${BASE_URL}/${REL_PATH}"
 
             echo "PUT ${REL_PATH}"
-            curl -sS -X PUT "$TARGET_URL" \
+            HTTP_CODE=$(curl -sS -o /dev/null -w "%{http_code}" -X PUT "$TARGET_URL" \
               -H "AccessKey: $BUNNY_API_KEY" \
-              --upload-file "$FILE"
+              --upload-file "$FILE")
+
+            if [ "$HTTP_CODE" -ge 400 ]; then
+              echo "Failed to upload ${REL_PATH} (HTTP $HTTP_CODE)"
+              exit 1
+            fi
           done
 
