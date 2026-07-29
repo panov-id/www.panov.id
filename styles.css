@@ -1,7 +1,16 @@
-:root {
+:root,
+:root[data-theme="dark"] {
   --console-primary: #00ff41;
   --console-text: #00ff41;
   --console-muted: #008f26;
+  --console-background: #000000;
+}
+
+:root[data-theme="light"] {
+  --console-primary: #0b3d91;
+  --console-text: #111111;
+  --console-muted: #5a6470;
+  --console-background: #ffffff;
 }
 
 * {
@@ -11,12 +20,13 @@
 body {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
     "Liberation Mono", "Courier New", monospace;
-  background: #000000;
+  background: var(--console-background);
   color: var(--console-text);
   min-height: 100vh;
   scroll-behavior: smooth;
   position: relative;
   overflow-x: hidden;
+  transition: background 0.25s ease, color 0.25s ease;
 }
 
 pre {
@@ -39,11 +49,100 @@ a:visited {
   color: var(--console-muted);
 }
 
+.theme-switch {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  max-width: 1100px;
+  margin: 1.75rem auto 0;
+  padding: 0 1.25rem;
+}
+
+.pill {
+  display: flex;
+  align-items: center;
+  padding: 0.4rem;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  opacity: 0.5;
+  transition: opacity 0.25s ease;
+}
+
+.pill:hover,
+.pill:focus-visible {
+  opacity: 0.85;
+}
+
+.pill[aria-pressed="true"] {
+  opacity: 1;
+}
+
+.pill-capsule {
+  display: block;
+  width: 3rem;
+  height: 1.4rem;
+  border-radius: 999px;
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.pill-capsule::after {
+  content: "";
+  position: absolute;
+  top: 0.18rem;
+  left: 0.5rem;
+  width: 1.1rem;
+  height: 0.35rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.55);
+  filter: blur(1px);
+}
+
+.pill-red .pill-capsule {
+  background: linear-gradient(160deg, #ff6b6b 0%, #d40000 55%, #7a0000 100%);
+}
+
+.pill-blue .pill-capsule {
+  background: linear-gradient(160deg, #7cc0ff 0%, #1668d6 55%, #06285e 100%);
+}
+
+.pill:hover .pill-capsule {
+  transform: translateY(-1px);
+}
+
+.pill-red[aria-pressed="true"] .pill-capsule {
+  box-shadow: 0 0 0.75rem rgba(255, 40, 40, 0.75);
+}
+
+.pill-blue[aria-pressed="true"] .pill-capsule {
+  box-shadow: 0 0 0.75rem rgba(40, 120, 255, 0.75);
+}
+
 @media (max-width: 768px) {
   pre {
     font-size: 0.8rem;
     padding: 0 0.9rem;
     margin: 1rem auto 1.5rem;
+  }
+
+  .theme-switch {
+    gap: 2rem;
+    margin-top: 1.25rem;
+    padding: 0 0.9rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body,
+  .pill,
+  .pill-capsule {
+    transition: none;
+  }
+
+  .pill:hover .pill-capsule {
+    transform: none;
   }
 }
 

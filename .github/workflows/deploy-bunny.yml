@@ -14,6 +14,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Build index.html from README.md
+        run: node build.js
+
       - name: Deploy to Bunny Storage
         env:
           BUNNY_API_KEY: ${{ secrets.BUNNY_API_KEY }}
@@ -34,8 +37,12 @@ jobs:
 
           echo "Uploading static files to $BASE_URL"
 
-          # Upload all files except git metadata and CI config
-          FILES=$(find . -type f ! -path "./.git/*" ! -path "./.github/*")
+          # Upload all files except git metadata, CI config and build tooling
+          FILES=$(find . -type f \
+            ! -path "./.git/*" \
+            ! -path "./.github/*" \
+            ! -path "./scripts/*" \
+            ! -name "build.js")
 
           for FILE in $FILES; do
             REL_PATH="${FILE#./}"

@@ -1,28 +1,72 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Eugene Panov — CV</title>
+    <meta name="description" content="Eugene Panov — Senior Full Stack Developer. PHP/Laravel and React, automation and microservices, 10+ years in payments and fintech. Limassol, Cyprus." />
+    <link rel="canonical" href="https://www.panov.id/" />
+    <meta property="og:type" content="profile" />
+    <meta property="og:title" content="Eugene Panov — CV" />
+    <meta property="og:description" content="Eugene Panov — Senior Full Stack Developer. PHP/Laravel and React, automation and microservices, 10+ years in payments and fintech. Limassol, Cyprus." />
+    <meta property="og:url" content="https://www.panov.id/" />
+    <meta name="twitter:card" content="summary" />
+    <script>
+      (function () {
+        var storedTheme = null;
+        try {
+          storedTheme = window.localStorage.getItem('theme');
+        } catch (storageError) {
+          storedTheme = null;
+        }
+        document.documentElement.setAttribute(
+          'data-theme',
+          storedTheme === 'light' ? 'light' : 'dark'
+        );
+      })();
+    </script>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <pre style="max-width: 1100px; margin: 1.5rem auto 2rem; padding: 0 1.25rem; font-size: 0.85rem; line-height: 1.6; white-space: pre-wrap;">
-## Eugene Panov – Senior Full Stack Engineer (PHP/Laravel, React)
+    <nav class="theme-switch" aria-label="Colour theme">
+      <button
+        type="button"
+        class="pill pill-red"
+        data-theme-value="dark"
+        aria-pressed="true"
+        aria-label="Dark theme"
+        title="Dark theme"
+      >
+        <span class="pill-capsule" aria-hidden="true"></span>
+      </button>
+      <button
+        type="button"
+        class="pill pill-blue"
+        data-theme-value="light"
+        aria-pressed="false"
+        aria-label="Light theme"
+        title="Light theme"
+      >
+        <span class="pill-capsule" aria-hidden="true"></span>
+      </button>
+    </nav>
+    <pre>
+## Eugene Panov – Senior Full Stack Developer | Automation &amp; Microservices Specialist | PHP
 
 Location: Limassol, Cyprus (CY)  
 LinkedIn: <a href="https://www.linkedin.com/in/evgenii-panov" target="_blank" rel="noreferrer">https://www.linkedin.com/in/evgenii-panov</a>  
 GitHub: <a href="https://github.com/evpanov" target="_blank" rel="noreferrer">https://github.com/evpanov</a>  
-Telegram: <a href="https://t.me/eugene_panov" target="_blank" rel="noreferrer">@eugene_panov</a>  
+GitHub: <a href="https://github.com/panov-id" target="_blank" rel="noreferrer">https://github.com/panov-id</a>  
+Telegram: <a href="https://t.me/ppaannoovv" target="_blank" rel="noreferrer">@ppaannoovv</a>  
 Languages: Russian (Native), English (B1)
 
 ---
 
 ## Summary
 
-Senior Full Stack Engineer with 10+ years of experience building scalable web applications and modernizing legacy systems, mainly in payments and fintech. Strong expertise in PHP/Laravel backends and React frontends, with a focus on clean architecture, reliability, and performance. Experience designing and implementing microservices, high‑load APIs, dashboards, and internal tools for fintech, e‑commerce, and analytics. Actively uses AI assistants (Cursor, GitHub Copilot, ChatGPT-like tools) to speed up delivery, refactoring, and documentation while keeping control over architecture and code quality.
+Senior Full Stack Engineer with 10+ years of experience building scalable web applications and modernizing legacy systems, mainly in payments and fintech. Strong expertise in PHP/Laravel backends and React frontends, with a focus on clean architecture, reliability, and performance. Experience designing and implementing microservices, high‑load APIs, dashboards, and internal tools for fintech, e‑commerce, and analytics. Actively uses AI to speed up delivery, refactoring, and documentation while keeping control over architecture and code quality.
 
-Open to: Senior PHP/Laravel Engineer, Full Stack Engineer, React Developer (remote or Cyprus-based).
+Looking for new opportunities as Full Stack Engineer, PHP Backend Developer, ReactJS Frontend Developer (remote or Cyprus-based).
 
 ---
 
@@ -31,15 +75,25 @@ Open to: Senior PHP/Laravel Engineer, Full Stack Engineer, React Developer (remo
 - Backend: PHP 7/8, Laravel, Lumen, PHPUnit, MySQL, PostgreSQL, Redis, RESTful APIs
 - Frontend: JavaScript (ES6+), React, HTML5, CSS3
 - Architecture: Microservices, system design, database design
-- DevOps & Tools: Docker, Git, CI/CD, Kafka, Vault, KeyCloak
+- DevOps &amp; Tools: Docker, Git, CI/CD, Kafka, Vault, KeyCloak
 - Domains: Payments, fintech, CRM, dashboards, data processing
 
 ---
 
 ## Experience
 
+### Agent Manager – NEIGHBRO.PLACE &amp; SOSED.PLACE  
+Jul 2026 – Present • Limassol, Cyprus • Remote • Self-employed
+
+---
+
+### Engineer – NDA  
+Mar 2026 – Present • Full-time
+
+---
+
 ### Senior Full Stack Developer – Bizcombo Technologies Ltd  
-Dec 2025 – Present • Limassol, Cyprus
+Dec 2025 – Mar 2026 • Limassol, Cyprus • On-site
 
 - Design and implement automation workflows connecting external/internal APIs.  
 - Build custom modules and architect scalable microservices for high‑performance backend systems.  
@@ -47,10 +101,10 @@ Dec 2025 – Present • Limassol, Cyprus
 
 ---
 
-### Full Stack Developer – F&F WORLDWIDE SERVICES LTD  
-Mar 2023 – Jul 2025 • Limassol, Cyprus
+### Full Stack Developer – F&amp;F WORLDWIDE SERVICES LTD  
+Mar 2023 – Jul 2025 • Limassol, Cyprus • On-site
 
-- Developed, refactored, and supported an in‑house DIY CRM & Client Area for a fintech company.  
+- Developed, refactored, and supported an in‑house DIY CRM &amp; Client Area for a fintech company.  
 - Implemented and maintained payment gateway integrations with providers (B2BInPay, VirtualPay, Skrill, Neteller, etc.).  
 - Built and supported trader gateways and integrations for MT4/MT5.  
 - Performed data analysis, investigated and resolved production issues, and handled operational tasks.  
@@ -59,7 +113,7 @@ Mar 2023 – Jul 2025 • Limassol, Cyprus
 ---
 
 ### Full Stack Web Developer – Reyo Media Cyprus  
-Apr 2022 – Feb 2023 • Limassol, Cyprus
+Apr 2022 – Feb 2023 • Limassol, Cyprus • Remote
 
 - Developed, refactored, and supported parts of a DIY analytics dashboard.  
 - Implemented procedures and services to retrieve large reports from affiliate platforms via APIs and web scraping.  
@@ -70,18 +124,18 @@ Apr 2022 – Feb 2023 • Limassol, Cyprus
 ---
 
 ### Full Stack Developer – Unlimit  
-Dec 2014 – Feb 2022 • Limassol, Cyprus
+Dec 2014 – Feb 2022 • Limassol, Cyprus • On-site
 
-- Developed, integrated, and supported a DIY e‑commerce platform (AddStore.com), including payment integrations (PayPal, OnlinePay) and YML import (Yandex Market).  
+- Developed, integrated, and supported a DIY e‑commerce platform (AddStore.com), including payment integrations (PayPal, OnlinePay), text search powered by Elastic, and YML import (Yandex Market).  
 - Built dashboards for MetaTrader and tools for merchants, including a Merchant Interview Questions application.  
-- Developed and supported RESTful APIs for partners and business products such as “Card Issuing”.  
+- Developed and supported RESTful APIs for partners and business products such as “Card Issuing”, and a relationship manager for SmartVista.  
 - Worked with high‑load financial systems and complex integrations in the payment industry.  
-- Stack: Yii2, PHP 7.4+, Laravel, ReactJS, MySQL, Oracle, SOAP, JavaScript, jQuery, HTML, CSS, Twig.
+- Stack: Yii2, PHP 7.4+, Laravel, ReactJS, MySQL, Oracle, Elastic, SOAP, JavaScript, jQuery, HTML, CSS, Twig.
 
 ---
 
 ### Web‑Developer – Dengi Online  
-Apr 2011 – Dec 2014 • Saint Petersburg, Russia
+Apr 2011 – Dec 2014 • Saint Petersburg, Russia • On-site
 
 - Integrated payment systems (mobile commerce, card payments, wallet and terminal systems) into the aggregation platform “Dengi Online”.  
 - Developed and supported integration modules to ensure stable operation.  
@@ -92,28 +146,38 @@ Apr 2011 – Dec 2014 • Saint Petersburg, Russia
 
 ### Earlier Roles
 
-- Web‑Developer – Metrika (Aug 2010 – Apr 2011)  
-  Developed and supported internal web interfaces (frontend and backend) for product catalogues, Axapta‑based information systems, and payment order preparation tools.
+- Web‑Developer – Metrika (Wholesale Trade/Import-Export) (Aug 2010 – Apr 2011)  
+  Developed and supported internal web interfaces (frontend and backend) for product catalogues, Axapta‑based information systems, and payment order preparation tools.  
+  Stack: Linux, Apache, MySQL, MSSQL, PHP, HTML, CSS, JavaScript, jQuery, AJAX, ExtJS.
 
 - Web Developer – KIT Finance Investment Bank (May 2007 – Apr 2010)  
-  Developed and supported intranet portals and internet websites, including modules for document exchange and internal tools.
+  Developed and supported intranet portals and internet websites, including modules for document exchange and internal tools.  
+  Stack: Linux, Apache, MySQL, PHP4/PHP5, HTML, CSS, JavaScript, Prototype JS, ExtJS, AJAX.
 
-- ASP Web Programmer – Piter Plus OOO (Feb 2006 – May 2007)  
-  Developed and supported online shop modules and billboard systems.
+- ASP Web Programmer – Piter Plus OOO (Internet Services) (Feb 2006 – May 2007)  
+  Developed and supported online shop modules and billboard systems.  
+  Stack: IIS, ASP, MSSQL, HTML, CSS, JavaScript, Photoshop.
 
-- Webmaster – Efo OOO (Jan 2005 – Jan 2006)  
-  Maintained content (news, articles), processed images, and supported company web presence.
+- Webmaster – Efo OOO (Electronics, Components, and Semiconductor Manufacturing) (Jan 2005 – Jan 2006)  
+  Maintained content (news, articles), processed images, and supported company web presence.  
+  Stack: HTML, CSS, Photoshop.
 
 ---
 
 ## Education
 
-Saint Petersburg State Polytechnic University – Engineering / Technics  
+Peter the Great St. Petersburg Polytechnic University – Technics  
 2000 – 2006 • Russia
 
 ---
 
 ## Selected Projects
+
+- SOSED.PLACE – <a href="https://sosed.place" target="_blank" rel="noreferrer">https://sosed.place</a>  
+  A local neighbour network: say a word to people nearby, match, talk — and let go. No profiles, no feeds.
+
+- NEIGHBRO – <a href="https://neighbro.place" target="_blank" rel="noreferrer">https://neighbro.place</a>  
+  Good neighbours. Real moments.
 
 - Waste Collection in Cyprus – <a href="https://wastecollectioncyprus.com" target="_blank" rel="noreferrer">https://wastecollectioncyprus.com</a>  
   Service for managing and optimizing waste collection information in Cyprus.
@@ -123,14 +187,34 @@ Saint Petersburg State Polytechnic University – Engineering / Technics
 
 - Paparad – <a href="https://paparad.bandcamp.com" target="_blank" rel="noreferrer">https://paparad.bandcamp.com</a>  
   Personal creative project (music).
-
----
-
-## Recommendations
-
-- “Evgenii has a deep understanding of the payment industry and the ability to develop creative solutions to complex problems. He handles multiple tasks while maintaining high quality and attention to detail.”  
-- “Highly skilled engineer with a strong focus on completing tasks, excellent at investigations and digging into unknown areas.”
     </pre>
+    <script>
+      (function () {
+        var buttons = document.querySelectorAll('[data-theme-value]');
+
+        function applyTheme(theme) {
+          document.documentElement.setAttribute('data-theme', theme);
+          buttons.forEach(function (button) {
+            button.setAttribute(
+              'aria-pressed',
+              String(button.dataset.themeValue === theme)
+            );
+          });
+          try {
+            window.localStorage.setItem('theme', theme);
+          } catch (storageError) {
+            /* private mode — the choice simply is not remembered */
+          }
+        }
+
+        buttons.forEach(function (button) {
+          button.addEventListener('click', function () {
+            applyTheme(button.dataset.themeValue);
+          });
+        });
+
+        applyTheme(document.documentElement.getAttribute('data-theme'));
+      })();
+    </script>
   </body>
 </html>
-
