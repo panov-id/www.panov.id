@@ -154,3 +154,98 @@ footer {
   color: var(--console-muted);
   text-align: right;
 }
+
+/* Blog: article typography on the same console palette as the CV page. */
+.article {
+  max-width: 46rem;
+  margin: 0 auto;
+  padding: 2.5rem 1.25rem 4rem;
+  color: var(--console-text);
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+.article h1 {
+  font-size: 1.6rem;
+  line-height: 1.25;
+  margin: 0 0 0.5rem;
+}
+
+.article h2 {
+  font-size: 1.2rem;
+  margin: 2.25rem 0 0.75rem;
+  border-bottom: 1px solid var(--console-muted);
+  padding-bottom: 0.35rem;
+}
+
+.article h3 {
+  font-size: 1.05rem;
+  margin: 1.75rem 0 0.5rem;
+}
+
+.article .meta {
+  color: var(--console-muted);
+  margin: 0 0 1.5rem;
+}
+
+.article .cover {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 0 2rem;
+  border: 1px solid var(--console-muted);
+}
+
+.article a {
+  color: var(--console-primary);
+}
+
+.article blockquote {
+  margin: 1.5rem 0;
+  padding: 0.25rem 0 0.25rem 1rem;
+  border-left: 3px solid var(--console-muted);
+  color: var(--console-muted);
+}
+
+.article pre.code {
+  overflow-x: auto;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--console-muted);
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.article table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.25rem 0;
+  font-size: 0.9rem;
+}
+
+.article th,
+.article td {
+  border: 1px solid var(--console-muted);
+  padding: 0.4rem 0.6rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+.article hr {
+  border: 0;
+  border-top: 1px solid var(--console-muted);
+  margin: 2rem 0;
+}
+
+.article .posts {
+  list-style: none;
+  padding: 0;
+}
+
+.article .posts li {
+  margin-bottom: 1.5rem;
+}
+
+.article .back {
+  color: var(--console-muted);
+  margin-top: 2.5rem;
+}
