@@ -14,8 +14,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Build index.html from README.md
-        run: node build.js
+      - name: Check posts for forbidden mentions
+        run: ./scripts/lint-brands.sh
+
+      - name: Build index.html from README.md and the blog from content/posts
+        run: |
+          node build.js
+          node build-blog.js
 
       - name: Deploy to Bunny Storage
         env:
@@ -41,8 +46,12 @@ jobs:
           FILES=$(find . -type f \
             ! -path "./.git/*" \
             ! -path "./.github/*" \
+            ! -path "./.claude/*" \
             ! -path "./scripts/*" \
-            ! -name "build.js")
+            ! -path "./content/*" \
+            ! -name "build.js" \
+            ! -name "build-blog.js" \
+            ! -name "CLAUDE.md")
 
           for FILE in $FILES; do
             REL_PATH="${FILE#./}"

@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Панов — записки</title>
+    <meta name="description" content="Заметки о разработке: спецификации, ревью, ошибки и то, что из них выносится." />
+    <link rel="canonical" href="https://www.panov.id/blog/" />
+    <link rel="alternate" type="application/rss+xml" title="Панов — записки" href="https://www.panov.id/feed.xml" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Панов — записки" />
+    <meta property="og:description" content="Заметки о разработке: спецификации, ревью, ошибки и то, что из них выносится." />
+    <meta property="og:url" content="https://www.panov.id/blog/" />
+    <script>
+      (function () {
+        try {
+          var stored = localStorage.getItem('theme');
+          if (stored === 'light' || stored === 'dark') {
+            document.documentElement.setAttribute('data-theme', stored);
+          }
+        } catch (error) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="article">
+      <h1>Панов — записки</h1>
+      <p class="meta">Заметки о разработке: спецификации, ревью, ошибки и то, что из них выносится.</p>
+      <ul class="posts">
+        <li><a href="/blog/pravila-po-sloyam.html">Правила по слоям: почему список из двадцати шести не работает</a><span class="meta"> · 18 августа 2026</span><br />Разложили инструкции для ассистента на ядро, навыки и хуки. Измерили сжатие, отказались от символьной записи и переложили половину правил из текста в скрипты.</li>
+      </ul>
+      <p class="back"><a href="/">← визитка</a> · <a href="/feed.xml">RSS</a></p>
+    </main>
+  </body>
+</html>
