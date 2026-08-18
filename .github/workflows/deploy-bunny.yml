@@ -28,6 +28,8 @@ jobs:
           BUNNY_STORAGE_ZONE: ${{ secrets.BUNNY_STORAGE_ZONE }}
           BUNNY_STORAGE_REGION: ${{ secrets.BUNNY_STORAGE_REGION }}
         run: |
+          set -euo pipefail
+
           if [ -z "$BUNNY_API_KEY" ] || [ -z "$BUNNY_STORAGE_ZONE" ]; then
             echo "BUNNY_API_KEY and BUNNY_STORAGE_ZONE secrets must be set."
             exit 1
@@ -40,10 +42,14 @@ jobs:
             BASE_URL="https://${BUNNY_STORAGE_REGION}.storage.bunnycdn.com/${BUNNY_STORAGE_ZONE}"
           fi
 
-          echo "Uploading static files to $BASE_URL"
+          echo "Publishing to $BASE_URL"
 
-          # Upload all files except git metadata, CI config and build tooling
-          FILES=$(find . -type f \
+          # The set of paths the site is supposed to consist of: everything the build
+          # produced, minus git metadata, CI config, build tooling and post sources.
+          # The same list drives both the upload and the cleanup, so a file can never
+          # be uploaded by one rule and deleted by another.
+          LOCAL_LIST=$(mktemp)
+          find . -type f \
             ! -path "./.git/*" \
             ! -path "./.github/*" \
             ! -path "./.claude/*" \
@@ -51,20 +57,107 @@ jobs:
             ! -path "./content/*" \
             ! -name "build.js" \
             ! -name "build-blog.js" \
-            ! -name "CLAUDE.md")
+            ! -name "CLAUDE.md" \
+            -print | sed 's|^\./||' | LC_ALL=C sort > "$LOCAL_LIST"
 
-          for FILE in $FILES; do
-            REL_PATH="${FILE#./}"
-            TARGET_URL="${BASE_URL}/${REL_PATH}"
+          LOCAL_COUNT=$(wc -l < "$LOCAL_LIST")
+          if [ "$LOCAL_COUNT" -eq 0 ]; then
+            echo "The build produced no files to publish — refusing to touch the storage zone."
+            exit 1
+          fi
+          echo "Files to publish: $LOCAL_COUNT"
 
+          while IFS= read -r REL_PATH; do
             echo "PUT ${REL_PATH}"
-            HTTP_CODE=$(curl -sS -o /dev/null -w "%{http_code}" -X PUT "$TARGET_URL" \
+            HTTP_CODE=$(curl -sS -o /dev/null -w "%{http_code}" -X PUT \
+              "${BASE_URL}/${REL_PATH}" \
               -H "AccessKey: $BUNNY_API_KEY" \
-              --upload-file "$FILE")
+              --upload-file "$REL_PATH")
 
             if [ "$HTTP_CODE" -ge 400 ]; then
               echo "Failed to upload ${REL_PATH} (HTTP $HTTP_CODE)"
               exit 1
             fi
+          done < "$LOCAL_LIST"
+
+          # Uploading alone never removes anything, so a deleted post would stay on the
+          # storage zone for good. Walk the zone and drop whatever the build no longer
+          # produces. A listing that does not come back as a JSON array fails the step
+          # instead of being read as "the zone is empty" — that mistake deletes a site.
+          REMOTE_LIST=$(mktemp)
+          DIRECTORY_QUEUE=$(mktemp)
+          echo "" > "$DIRECTORY_QUEUE"
+
+          while [ -s "$DIRECTORY_QUEUE" ]; do
+            PREFIX=$(head -n 1 "$DIRECTORY_QUEUE")
+            sed -i '1d' "$DIRECTORY_QUEUE"
+
+            RESPONSE=$(curl -sS -H "AccessKey: $BUNNY_API_KEY" "${BASE_URL}/${PREFIX}")
+            if ! printf '%s' "$RESPONSE" | jq -e 'type == "array"' > /dev/null 2>&1; then
+              echo "Could not list \"${PREFIX}\" on the storage zone; the response was not a JSON array."
+              exit 1
+            fi
+
+            printf '%s' "$RESPONSE" | jq -r --arg prefix "$PREFIX" \
+              '.[] | select(.IsDirectory) | "\($prefix)\(.ObjectName)/"' >> "$DIRECTORY_QUEUE"
+            printf '%s' "$RESPONSE" | jq -r --arg prefix "$PREFIX" \
+              '.[] | select(.IsDirectory | not) | "\($prefix)\(.ObjectName)"' >> "$REMOTE_LIST"
           done
 
+          LC_ALL=C sort -o "$REMOTE_LIST" "$REMOTE_LIST"
+          STALE_LIST=$(mktemp)
+          LC_ALL=C comm -13 "$LOCAL_LIST" "$REMOTE_LIST" > "$STALE_LIST"
+          STALE_COUNT=$(wc -l < "$STALE_LIST")
+
+          if [ "$STALE_COUNT" -eq 0 ]; then
+            echo "Nothing stale on the storage zone."
+            exit 0
+          fi
+
+          # A cleanup larger than the site itself means the local list is wrong, not that
+          # the site shrank that much. Stop and let a human look rather than empty the zone.
+          if [ "$STALE_COUNT" -gt "$LOCAL_COUNT" ]; then
+            echo "Refusing to delete $STALE_COUNT files while publishing only $LOCAL_COUNT:"
+            cat "$STALE_LIST"
+            exit 1
+          fi
+
+          echo "Deleting $STALE_COUNT file(s) no longer produced by the build:"
+          while IFS= read -r REL_PATH; do
+            echo "DELETE ${REL_PATH}"
+            HTTP_CODE=$(curl -sS -o /dev/null -w "%{http_code}" -X DELETE \
+              "${BASE_URL}/${REL_PATH}" \
+              -H "AccessKey: $BUNNY_API_KEY")
+
+            if [ "$HTTP_CODE" -ge 400 ]; then
+              echo "Failed to delete ${REL_PATH} (HTTP $HTTP_CODE)"
+              exit 1
+            fi
+          done < "$STALE_LIST"
+
+      - name: Purge the CDN cache
+        env:
+          BUNNY_ACCOUNT_API_KEY: ${{ secrets.BUNNY_ACCOUNT_API_KEY }}
+          BUNNY_PULLZONE_ID: ${{ secrets.BUNNY_PULLZONE_ID }}
+        run: |
+          set -euo pipefail
+
+          # Updating the storage zone does not touch what the edge already cached, so
+          # without this step an edited post keeps serving its old copy until the TTL
+          # runs out. Missing credentials are a warning rather than a failure: the
+          # content is published either way, it just goes stale-free a bit later.
+          if [ -z "$BUNNY_ACCOUNT_API_KEY" ] || [ -z "$BUNNY_PULLZONE_ID" ]; then
+            echo "::warning::BUNNY_ACCOUNT_API_KEY and BUNNY_PULLZONE_ID are not set — the storage zone was updated, but the edge keeps serving its cached copy until the TTL expires."
+            exit 0
+          fi
+
+          HTTP_CODE=$(curl -sS -o /dev/null -w "%{http_code}" -X POST \
+            "https://api.bunny.net/pullzone/${BUNNY_PULLZONE_ID}/purgeCache" \
+            -H "AccessKey: $BUNNY_ACCOUNT_API_KEY")
+
+          if [ "$HTTP_CODE" -ge 400 ]; then
+            echo "Failed to purge the pull zone cache (HTTP $HTTP_CODE)"
+            exit 1
+          fi
+
+          echo "Pull zone cache purged (HTTP $HTTP_CODE)"
