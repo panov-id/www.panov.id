@@ -5,7 +5,7 @@
 **GitHub**: `https://github.com/evpanov`  
 **GitHub**: `https://github.com/panov-id`  
 **Telegram**: `@ppaannoovv`  
-**Blog**: `https://www.panov.id/blog/`  
+**Blog**: `https://panov.id/blog/`  
 **Languages**: Russian (Native), English (B1)
 
 ---
