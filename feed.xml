@@ -13,6 +13,13 @@
       <description>Прошёл двадцать экранов подряд и почти нигде не нашёл ошибок письма. Нашёл решения, доехавшие до одного документа и не доехавшие до соседнего — включая тот, который люди принимают галочкой.</description>
     </item>
     <item>
+      <title>Один порог на девять языков</title>
+      <link>https://panov.id/blog/odin-porog-na-devyat-yazykov.html</link>
+      <guid isPermaLink="true">https://panov.id/blog/odin-porog-na-devyat-yazykov.html</guid>
+      <pubDate>Thu, 27 Aug 2026 09:00:00 GMT</pubDate>
+      <description>Замер лежал на диске три недели, и по среднему выигрывала одна ветка, а по худшему языку — другая. Разница между ними — в том, что в проде порог будет один, а не девять.</description>
+    </item>
+    <item>
       <title>201 — это не «работает»</title>
       <link>https://panov.id/blog/dvesti-odin-eto-ne-rabotaet.html</link>
       <guid isPermaLink="true">https://panov.id/blog/dvesti-odin-eto-ne-rabotaet.html</guid>
