@@ -2,27 +2,27 @@
 <rss version="2.0">
   <channel>
     <title>Панов — записки</title>
-    <link>https://www.panov.id/blog/</link>
+    <link>https://panov.id/blog/</link>
     <description>Заметки о разработке: спецификации, ревью, ошибки и то, что из них выносится.</description>
     <language>ru</language>
     <item>
       <title>201 — это не «работает»</title>
-      <link>https://www.panov.id/blog/dvesti-odin-eto-ne-rabotaet.html</link>
-      <guid isPermaLink="true">https://www.panov.id/blog/dvesti-odin-eto-ne-rabotaet.html</guid>
+      <link>https://panov.id/blog/dvesti-odin-eto-ne-rabotaet.html</link>
+      <guid isPermaLink="true">https://panov.id/blog/dvesti-odin-eto-ne-rabotaet.html</guid>
       <pubDate>Thu, 27 Aug 2026 09:00:00 GMT</pubDate>
       <description>Три раза подряд API принял правило, которое ничего не делало. Ответ нашёлся не в документации, а в соседней зоне, где такое же правило работает много месяцев.</description>
     </item>
     <item>
       <title>Документ против документа</title>
-      <link>https://www.panov.id/blog/dokument-protiv-dokumenta.html</link>
-      <guid isPermaLink="true">https://www.panov.id/blog/dokument-protiv-dokumenta.html</guid>
+      <link>https://panov.id/blog/dokument-protiv-dokumenta.html</link>
+      <guid isPermaLink="true">https://panov.id/blog/dokument-protiv-dokumenta.html</guid>
       <pubDate>Thu, 27 Aug 2026 09:00:00 GMT</pubDate>
       <description>Спецификация расходится сама с собой тише, чем падает тест. Дешёвая проверка на формулировки — и почему она чего-то стоит только тогда, когда краснеет на тебе.</description>
     </item>
     <item>
       <title>Правила по слоям: почему список из двадцати шести не работает</title>
-      <link>https://www.panov.id/blog/pravila-po-sloyam.html</link>
-      <guid isPermaLink="true">https://www.panov.id/blog/pravila-po-sloyam.html</guid>
+      <link>https://panov.id/blog/pravila-po-sloyam.html</link>
+      <guid isPermaLink="true">https://panov.id/blog/pravila-po-sloyam.html</guid>
       <pubDate>Tue, 18 Aug 2026 09:00:00 GMT</pubDate>
       <description>Разложили инструкции для ассистента на ядро, навыки и хуки. Измерили сжатие, отказались от символьной записи и переложили половину правил из текста в скрипты.</description>
     </item>

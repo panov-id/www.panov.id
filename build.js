@@ -9,7 +9,11 @@ const pageTitle = 'Eugene Panov — CV';
 const pageDescription =
   'Eugene Panov — Senior Full Stack Developer. PHP/Laravel and React, ' +
   'automation and microservices, 10+ years in payments and fintech. Limassol, Cyprus.';
-const canonicalUrl = 'https://www.panov.id/';
+// Канонический адрес — без «www.»: с 27.08.2026 адрес с префиксом отвечает 301
+// и уводит сюда. Пока здесь стоял он, каждая каноническая ссылка вела на редирект
+// — лишний переход для человека и противоречие для поисковика: canonical называл
+// адрес, который сам объявляет себя неканоническим.
+const canonicalUrl = 'https://panov.id/';
 const telegramAccount = '@ppaannoovv';
 const telegramUrl = 'https://t.me/ppaannoovv';
 

@@ -6,7 +6,11 @@ const postsDirectory = join(projectDirectory, 'content', 'posts');
 const blogDirectory = join(projectDirectory, 'blog');
 const coversDirectory = join(blogDirectory, 'covers');
 
-const siteUrl = 'https://www.panov.id';
+// Без «www.» — с 27.08.2026 префиксный адрес отвечает 301 на этот. Отсюда растут
+// canonical страниц, og:url, ссылки и guid в ленте: guid важнее прочего, потому
+// что читалки считают запись новой, когда он меняется, и один переезд адреса они
+// переживут, а два — уже дубли в чужих лентах.
+const siteUrl = 'https://panov.id';
 const blogTitle = 'Панов — записки';
 const blogDescription =
   'Заметки о разработке: спецификации, ревью, ошибки и то, что из них выносится.';
