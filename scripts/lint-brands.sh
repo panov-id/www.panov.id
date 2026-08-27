@@ -26,6 +26,11 @@ BRANDS=(
   stripe paypal revolut wise
   grafana prometheus loki sentry datadog
   keycloak auth0 okta
+  # Свои проекты — такие же бренды: пост пишется о работе, а не о том, чья она.
+  # Раньше список знал только чужие названия, и «выкатили sosed.place» прошло бы
+  # линтер насквозь.
+  'xor\.ad' 'sosed\.place' 'neighbro\.place' 'panov\.id'
+  psytican pejeded noisen 'redpill-player' 'soulseek-charts' 'sunset-residents'
 )
 
 found=0
