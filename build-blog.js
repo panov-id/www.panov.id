@@ -200,7 +200,10 @@ function parsePost(fileName) {
     slug: fileName.replace(/^\d{4}-\d{2}-\d{2}-/, '').replace(/\.md$/, ''),
     fileName,
     title: meta.title,
-    date: meta.date,
+    // Дата может нести время: «2026-08-27 22:38». Шесть записей за сутки без
+    // часа сортировать нечем, а по имени файла — значит по алфавиту слага.
+    date: meta.date.slice(0, 10),
+    time: (meta.date.match(/\b(\d{2}:\d{2})\b/) || [])[1] || '',
     summary: meta.summary,
     body: match[2],
   };
@@ -252,8 +255,18 @@ function formatDate(value) {
   return `${day} ${months[month - 1]} ${year}`;
 }
 
-function toRfc822(value) {
-  return new Date(`${value}T09:00:00Z`).toUTCString();
+function stamp(post) {
+  return `${post.date}T${post.time || '00:00'}`;
+}
+
+function formatStamp(post) {
+  return post.time ? `${formatDate(post.date)}, ${post.time}` : formatDate(post.date);
+}
+
+function toRfc822(post) {
+  // Смещение задано явно: машина сборки может стоять в любом поясе, а лента
+  // обязана показывать тот же час, что и страница.
+  return new Date(`${post.date}T${post.time || '09:00'}:00+03:00`).toUTCString();
 }
 
 mkdirSync(coversDirectory, { recursive: true });
@@ -262,7 +275,7 @@ const posts = existsSync(postsDirectory)
   ? readdirSync(postsDirectory)
       .filter(name => name.endsWith('.md'))
       .map(parsePost)
-      .sort((first, second) => second.fileName.localeCompare(first.fileName))
+      .sort((first, second) => stamp(second).localeCompare(stamp(first)))
   : [];
 
 for (const post of posts) {
@@ -271,7 +284,7 @@ for (const post of posts) {
   const body = [
     '      <p class="back"><a href="/blog/">← все записи</a></p>',
     `      <h1>${escapeHtml(post.title)}</h1>`,
-    `      <p class="meta">${formatDate(post.date)}</p>`,
+    `      <p class="meta">${formatStamp(post)}</p>`,
     `      <img class="cover" src="/blog/covers/${post.slug}.svg" alt="" />`,
     renderMarkdown(post.body).split('\n').map(line => `      ${line}`).join('\n'),
     '      <p class="back"><a href="/">← визитка</a> · <a href="/feed.xml">RSS</a></p>',
@@ -297,7 +310,7 @@ const listBody = [
   ...posts.map(
     post =>
       `        <li><a href="/blog/${post.slug}.html">${escapeHtml(post.title)}</a>` +
-      `<span class="meta"> · ${formatDate(post.date)}</span><br />${escapeHtml(post.summary)}</li>`
+      `<span class="meta"> · ${formatStamp(post)}</span><br />${escapeHtml(post.summary)}</li>`
   ),
   '      </ul>',
   '      <p class="back"><a href="/">← визитка</a> · <a href="/feed.xml">RSS</a></p>',
@@ -321,7 +334,7 @@ const feedItems = posts
       <title>${escapeHtml(post.title)}</title>
       <link>${siteUrl}/blog/${post.slug}.html</link>
       <guid isPermaLink="true">${siteUrl}/blog/${post.slug}.html</guid>
-      <pubDate>${toRfc822(post.date)}</pubDate>
+      <pubDate>${toRfc822(post)}</pubDate>
       <description>${escapeHtml(post.summary)}</description>
     </item>`
   )
