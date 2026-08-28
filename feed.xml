@@ -6,6 +6,13 @@
     <description>Заметки о разработке: спецификации, ревью, ошибки и то, что из них выносится.</description>
     <language>ru</language>
     <item>
+      <title>Каждая кнопка — решение о том, что узнает сервер</title>
+      <link>https://panov.id/blog/knopka-eto-reshenie-o-servere.html</link>
+      <guid isPermaLink="true">https://panov.id/blog/knopka-eto-reshenie-o-servere.html</guid>
+      <pubDate>Fri, 28 Aug 2026 15:50:00 GMT</pubDate>
+      <description>За день разобрали восемь экранов подряд. Почти каждое «давай добавим кнопку» упиралось не в вёрстку, а в вопрос «что для этой кнопки придётся запомнить и кому».</description>
+    </item>
+    <item>
       <title>Кто генерит код</title>
       <link>https://panov.id/blog/kto-generit-kod.html</link>
       <guid isPermaLink="true">https://panov.id/blog/kto-generit-kod.html</guid>
