@@ -6,6 +6,13 @@
     <description>Заметки о разработке: спецификации, ревью, ошибки и то, что из них выносится.</description>
     <language>ru</language>
     <item>
+      <title>Самое бедное лицо решает первым</title>
+      <link>https://panov.id/blog/samoe-bednoe-litso.html</link>
+      <guid isPermaLink="true">https://panov.id/blog/samoe-bednoe-litso.html</guid>
+      <pubDate>Sat, 29 Aug 2026 16:05:00 GMT</pubDate>
+      <description>Игровая доска не работала с клавиатуры — казалось, задача на неделю. Ответ был написан три недели назад в документе про терминальный клиент. Про то, почему самая зажатая версия продукта делает работу за остальные.</description>
+    </item>
+    <item>
       <title>Тест прошёл случай, которого не бывает</title>
       <link>https://panov.id/blog/vetka-kotoroy-net.html</link>
       <guid isPermaLink="true">https://panov.id/blog/vetka-kotoroy-net.html</guid>
