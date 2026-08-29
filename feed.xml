@@ -6,6 +6,13 @@
     <description>Заметки о разработке: спецификации, ревью, ошибки и то, что из них выносится.</description>
     <language>ru</language>
     <item>
+      <title>Тест прошёл случай, которого не бывает</title>
+      <link>https://panov.id/blog/vetka-kotoroy-net.html</link>
+      <guid isPermaLink="true">https://panov.id/blog/vetka-kotoroy-net.html</guid>
+      <pubDate>Sat, 29 Aug 2026 14:20:00 GMT</pubDate>
+      <description>Написал проверку на три поломки, сломал все три, все три покраснели. Одна из них была недостижима в принципе, а тест этого не заметил, потому что сравнивал код возврата. Про то, чем «упало» отличается от «упало по той причине».</description>
+    </item>
+    <item>
       <title>Предъявите текст, который он принял</title>
       <link>https://panov.id/blog/predyavite-tekst.html</link>
       <guid isPermaLink="true">https://panov.id/blog/predyavite-tekst.html</guid>
