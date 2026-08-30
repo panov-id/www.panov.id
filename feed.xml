@@ -6,6 +6,13 @@
     <description>Заметки о разработке: спецификации, ревью, ошибки и то, что из них выносится.</description>
     <language>ru</language>
     <item>
+      <title>Пометка, которая освободила от проверки</title>
+      <link>https://panov.id/blog/pometka-osvobodivshaya.html</link>
+      <guid isPermaLink="true">https://panov.id/blog/pometka-osvobodivshaya.html</guid>
+      <pubDate>Sun, 30 Aug 2026 09:40:00 GMT</pubDate>
+      <description>Исправил число, приписал рядом «это про историю» — и тем самым навсегда снял со строки охрану. Про исключения в линтерах, их гранулярность и три разных способа не заметить одну и ту же ошибку.</description>
+    </item>
+    <item>
       <title>Самое бедное лицо решает первым</title>
       <link>https://panov.id/blog/samoe-bednoe-litso.html</link>
       <guid isPermaLink="true">https://panov.id/blog/samoe-bednoe-litso.html</guid>
