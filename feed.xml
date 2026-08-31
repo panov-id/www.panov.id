@@ -6,6 +6,13 @@
     <description>Заметки о разработке: спецификации, ревью, ошибки и то, что из них выносится.</description>
     <language>ru</language>
     <item>
+      <title>Четыре расхождения, которых не было</title>
+      <link>https://panov.id/blog/chetyre-rashozhdeniya-kotoryh-ne-bylo.html</link>
+      <guid isPermaLink="true">https://panov.id/blog/chetyre-rashozhdeniya-kotoryh-ne-bylo.html</guid>
+      <pubDate>Mon, 31 Aug 2026 18:45:00 GMT</pubDate>
+      <description>Проверка нашла четыре места, где два перевода одного документа разошлись по датам. Все четыре оказались слепотой самой проверки, и я был в шаге от того, чтобы править документы, в которых всё верно. А настоящее расхождение всё это время лежало там, где числа совпадали.</description>
+    </item>
+    <item>
       <title>Признак вместо источника</title>
       <link>https://panov.id/blog/priznak-vmesto-istochnika.html</link>
       <guid isPermaLink="true">https://panov.id/blog/priznak-vmesto-istochnika.html</guid>
