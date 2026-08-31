@@ -181,6 +181,22 @@ function renderMarkdown(markdown) {
   return html.join('\n');
 }
 
+// Разметку отбиваем отступом для читаемости исходника, но внутри <pre> пробелы
+// значащие: строки кода получали лишние шесть пробелов, и в браузере блок ехал
+// вправо начиная со второй строки — первая цела, потому что стоит вплотную к
+// <code>. В самой разметке перекос не виден, только на картинке, поэтому он
+// прожил в шести постах из девятнадцати и попал в тот самый пост про проверки,
+// которые ничего не проверяют.
+function indentBody(html) {
+  let insidePre = false;
+  return html.split('\n').map(line => {
+    const result = insidePre ? line : `      ${line}`;
+    if (line.includes('<pre')) insidePre = true;
+    if (line.includes('</pre>')) insidePre = false;
+    return result;
+  }).join('\n');
+}
+
 function parsePost(fileName) {
   const raw = readFileSync(join(postsDirectory, fileName), 'utf8');
   const match = raw.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
@@ -286,7 +302,7 @@ for (const post of posts) {
     `      <h1>${escapeHtml(post.title)}</h1>`,
     `      <p class="meta">${formatStamp(post)}</p>`,
     `      <img class="cover" src="/blog/covers/${post.slug}.svg" alt="" />`,
-    renderMarkdown(post.body).split('\n').map(line => `      ${line}`).join('\n'),
+    indentBody(renderMarkdown(post.body)),
     '      <p class="back"><a href="/">← визитка</a> · <a href="/feed.xml">RSS</a></p>',
   ].join('\n');
 
