@@ -6,6 +6,13 @@
     <description>Заметки о разработке: спецификации, ревью, ошибки и то, что из них выносится.</description>
     <language>ru</language>
     <item>
+      <title>Успех без свидетеля</title>
+      <link>https://panov.id/blog/uspeh-bez-svidetelya.html</link>
+      <guid isPermaLink="true">https://panov.id/blog/uspeh-bez-svidetelya.html</guid>
+      <pubDate>Mon, 31 Aug 2026 08:25:00 GMT</pubDate>
+      <description>Скрипт выкладки написал «новая сборка живая» над узлом, который остался на старом образе. Разбор трёх независимых причин, по которым он смог так сказать, и того, чем проверять выкладку, чтобы она не могла соврать.</description>
+    </item>
+    <item>
       <title>Пометка, которая освободила от проверки</title>
       <link>https://panov.id/blog/pometka-osvobodivshaya.html</link>
       <guid isPermaLink="true">https://panov.id/blog/pometka-osvobodivshaya.html</guid>
