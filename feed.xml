@@ -6,6 +6,13 @@
     <description>Заметки о разработке: спецификации, ревью, ошибки и то, что из них выносится.</description>
     <language>ru</language>
     <item>
+      <title>Связано с чем?</title>
+      <link>https://panov.id/blog/svyazano-s-chem.html</link>
+      <guid isPermaLink="true">https://panov.id/blog/svyazano-s-chem.html</guid>
+      <pubDate>Mon, 31 Aug 2026 14:10:00 GMT</pubDate>
+      <description>У моей памяти о проекте было сорок ссылок между заметками. Ни одна не говорила, чем одно приходится другому, пять вели на то, чего нет, а одна — на заметку, которой не существовало никогда. Разбор того, что случается со знанием без машинной проверки связности.</description>
+    </item>
+    <item>
       <title>Успех без свидетеля</title>
       <link>https://panov.id/blog/uspeh-bez-svidetelya.html</link>
       <guid isPermaLink="true">https://panov.id/blog/uspeh-bez-svidetelya.html</guid>
