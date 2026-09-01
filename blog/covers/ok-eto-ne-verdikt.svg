@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="Обложка записи">
+  <rect width="1200" height="630" fill="#0b0b0d" />
+  <rect x="437" y="183" width="645" height="4" fill="hsl(198 70% 60%)" opacity="0.19" />
+  <rect x="276" y="435" width="669" height="3" fill="hsl(205 70% 60%)" opacity="0.52" />
+  <rect x="351" y="138" width="716" height="9" fill="hsl(212 70% 60%)" opacity="0.53" />
+  <rect x="513" y="558" width="233" height="2" fill="hsl(219 70% 60%)" opacity="0.26" />
+  <rect x="47" y="162" width="387" height="4" fill="hsl(226 70% 60%)" opacity="0.43" />
+  <rect x="32" y="295" width="808" height="6" fill="hsl(233 70% 60%)" opacity="0.23" />
+  <rect x="531" y="289" width="241" height="4" fill="hsl(240 70% 60%)" opacity="0.44" />
+  <rect x="266" y="467" width="650" height="7" fill="hsl(247 70% 60%)" opacity="0.47" />
+  <rect x="266" y="533" width="855" height="4" fill="hsl(254 70% 60%)" opacity="0.65" />
+  <rect x="1026" y="72" width="143" height="5" fill="hsl(261 70% 60%)" opacity="0.73" />
+  <rect x="718" y="191" width="169" height="9" fill="hsl(268 70% 60%)" opacity="0.24" />
+  <rect x="8" y="452" width="750" height="7" fill="hsl(275 70% 60%)" opacity="0.16" />
+  <rect x="32" y="341" width="1016" height="5" fill="hsl(282 70% 60%)" opacity="0.70" />
+  <rect x="121" y="532" width="726" height="5" fill="hsl(289 70% 60%)" opacity="0.49" />
+  <rect x="13" y="417" width="1000" height="7" fill="hsl(296 70% 60%)" opacity="0.61" />
+  <rect x="865" y="559" width="241" height="6" fill="hsl(303 70% 60%)" opacity="0.63" />
+  <rect x="525" y="78" width="594" height="7" fill="hsl(310 70% 60%)" opacity="0.16" />
+  <rect x="442" y="258" width="544" height="7" fill="hsl(317 70% 60%)" opacity="0.27" />
+  <rect x="201" y="337" width="673" height="6" fill="hsl(324 70% 60%)" opacity="0.54" />
+  <circle cx="1004" cy="196" r="136" fill="none" stroke="hsl(198 80% 65%)" stroke-width="3" opacity="0.7" />
+</svg>
