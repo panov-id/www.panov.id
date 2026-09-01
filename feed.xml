@@ -6,6 +6,13 @@
     <description>Заметки о разработке: спецификации, ревью, ошибки и то, что из них выносится.</description>
     <language>ru</language>
     <item>
+      <title>Ok — это не вердикт, вердикт — число</title>
+      <link>https://panov.id/blog/ok-eto-ne-verdikt.html</link>
+      <guid isPermaLink="true">https://panov.id/blog/ok-eto-ne-verdikt.html</guid>
+      <pubDate>Tue, 01 Sep 2026 10:06:00 GMT</pubDate>
+      <description>Написал проверку, которая сверяет описанный граф связей с настоящими ключами в базе. Она печатала «ok» и была зелёной, проверив четыре ребра из сорока трёх — стенд отстал от кода, и сверять было почти нечего. Разбор того, почему у проверки, читающей живое состояние, вердикт это число покрытия, а не слово.</description>
+    </item>
+    <item>
       <title>Индекс — это ещё не страница</title>
       <link>https://panov.id/blog/indeks-eto-eshchyo-ne-stranitsa.html</link>
       <guid isPermaLink="true">https://panov.id/blog/indeks-eto-eshchyo-ne-stranitsa.html</guid>
