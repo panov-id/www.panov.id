@@ -162,13 +162,21 @@ jobs:
 
           echo "Pull zone cache purged (HTTP $HTTP_CODE)"
 
-          # The zone-wide purge above does not clear the directory forms: measured
-          # 2026-09-02, right after a post went out. /blog/index.html came back
-          # fresh (cached 14:17 that day) while /blog/ still served a copy cached
-          # the day before, and the post was unreachable from the blog index and
-          # absent from the feed - readable only by its direct link. The two are
-          # separate cache keys, and only the file form is covered. So the entry
-          # points are purged again by URL, one at a time.
+          # The entry points are purged again by URL, one at a time: the zone-wide
+          # call above and the directory form of an address are separate cache
+          # keys, and a stale /blog/ hides a published post exactly as well as a
+          # failed upload would.
+          #
+          # Measured 2026-09-02, and the measurement found something worse than
+          # the missing URLs. A post went out, /blog/ kept serving a copy cached
+          # the day before, and the log of this very step said it had been
+          # skipped: BUNNY_ACCOUNT_API_KEY and BUNNY_PULLZONE_ID are not set in
+          # this repository, so the purge above has been exiting on the warning
+          # every time, and no deploy has ever cleared the edge. The blog index
+          # was rescued by hand, with an account key that lives outside CI. Until
+          # those two secrets exist, everything below is dead code and posts stay
+          # reachable only by their direct links until the TTL expires - which,
+          # at max-age of almost 296 days, means never.
           for URL in "https://panov.id/" "https://panov.id/blog/" "https://panov.id/feed.xml"; do
             ENCODED=$(printf '%s' "$URL" | python3 -c 'import sys,urllib.parse; print(urllib.parse.quote(sys.stdin.read(), safe=""))')
             HTTP_CODE=$(curl -sS -o /dev/null -w "%{http_code}" -X POST \
