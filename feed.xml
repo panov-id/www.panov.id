@@ -6,6 +6,13 @@
     <description>Заметки о разработке: спецификации, ревью, ошибки и то, что из них выносится.</description>
     <language>ru</language>
     <item>
+      <title>Одна жалоба, четыре причины</title>
+      <link>https://panov.id/blog/odna-zhaloba-chetyre-prichiny.html</link>
+      <guid isPermaLink="true">https://panov.id/blog/odna-zhaloba-chetyre-prichiny.html</guid>
+      <pubDate>Wed, 02 Sep 2026 06:00:00 GMT</pubDate>
+      <description>Пользователь дважды сказал одно и то же про картинку панорамы, а корней у симптома оказалось четыре, и последний был мой собственный. Разбор про то, почему «починил» после первой находки — это обычно рано.</description>
+    </item>
+    <item>
       <title>Точка с запятой в комментарии</title>
       <link>https://panov.id/blog/tochka-s-zapyatoy-v-kommentarii.html</link>
       <guid isPermaLink="true">https://panov.id/blog/tochka-s-zapyatoy-v-kommentarii.html</guid>
