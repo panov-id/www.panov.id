@@ -6,6 +6,13 @@
     <description>Заметки о разработке: спецификации, ревью, ошибки и то, что из них выносится.</description>
     <language>ru</language>
     <item>
+      <title>Точка с запятой в комментарии</title>
+      <link>https://panov.id/blog/tochka-s-zapyatoy-v-kommentarii.html</link>
+      <guid isPermaLink="true">https://panov.id/blog/tochka-s-zapyatoy-v-kommentarii.html</guid>
+      <pubDate>Wed, 02 Sep 2026 06:00:00 GMT</pubDate>
+      <description>Ветка, где менялись только документы, уронила тесты. Разбор: почему спека — это вход для машины, и что нашла панель из пяти рецензентов там, где ворота были зелёные.</description>
+    </item>
+    <item>
       <title>Цена, названная наполовину</title>
       <link>https://panov.id/blog/cena-nazvannaya-napolovinu.html</link>
       <guid isPermaLink="true">https://panov.id/blog/cena-nazvannaya-napolovinu.html</guid>
