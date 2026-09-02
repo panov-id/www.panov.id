@@ -161,3 +161,22 @@ jobs:
           fi
 
           echo "Pull zone cache purged (HTTP $HTTP_CODE)"
+
+          # The zone-wide purge above does not clear the directory forms: measured
+          # 2026-09-02, right after a post went out. /blog/index.html came back
+          # fresh (cached 14:17 that day) while /blog/ still served a copy cached
+          # the day before, and the post was unreachable from the blog index and
+          # absent from the feed - readable only by its direct link. The two are
+          # separate cache keys, and only the file form is covered. So the entry
+          # points are purged again by URL, one at a time.
+          for URL in "https://panov.id/" "https://panov.id/blog/" "https://panov.id/feed.xml"; do
+            ENCODED=$(printf '%s' "$URL" | python3 -c 'import sys,urllib.parse; print(urllib.parse.quote(sys.stdin.read(), safe=""))')
+            HTTP_CODE=$(curl -sS -o /dev/null -w "%{http_code}" -X POST \
+              "https://api.bunny.net/purge?url=${ENCODED}&async=false" \
+              -H "AccessKey: $BUNNY_ACCOUNT_API_KEY")
+            if [ "$HTTP_CODE" -ge 400 ]; then
+              echo "Failed to purge $URL (HTTP $HTTP_CODE)"
+              exit 1
+            fi
+            echo "Purged $URL (HTTP $HTTP_CODE)"
+          done
