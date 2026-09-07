@@ -6,6 +6,13 @@
     <description>Заметки о разработке: спецификации, ревью, ошибки и то, что из них выносится.</description>
     <language>ru</language>
     <item>
+      <title>Ваше собственное эхо</title>
+      <link>https://panov.id/blog/vashe-sobstvennoe-eho.html</link>
+      <guid isPermaLink="true">https://panov.id/blog/vashe-sobstvennoe-eho.html</guid>
+      <pubDate>Mon, 07 Sep 2026 06:00:00 GMT</pubDate>
+      <description>Один симметричный ключ на разговор двоих выглядит правильным решением, и с шифрованием у него всё в порядке. Проблема в другом: из шифротекста не следует, кто его написал, — и сервер может вернуть вам ваше же сообщение как входящее. Разбор того, как это чинится одной строкой в выводе ключей, и почему подпись здесь была бы дороже и хуже.</description>
+    </item>
+    <item>
       <title>Видно или подключается, выбирайте одно</title>
       <link>https://panov.id/blog/vidno-ili-podklyuchaetsya-vybirayte-odno.html</link>
       <guid isPermaLink="true">https://panov.id/blog/vidno-ili-podklyuchaetsya-vybirayte-odno.html</guid>

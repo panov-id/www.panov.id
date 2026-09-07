@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="Обложка записи">
+  <rect width="1200" height="630" fill="#0b0b0d" />
+  <rect x="325" y="245" width="733" height="6" fill="hsl(9 70% 60%)" opacity="0.28" />
+  <rect x="292" y="72" width="202" height="9" fill="hsl(16 70% 60%)" opacity="0.63" />
+  <rect x="144" y="383" width="155" height="6" fill="hsl(23 70% 60%)" opacity="0.15" />
+  <rect x="341" y="500" width="468" height="8" fill="hsl(30 70% 60%)" opacity="0.71" />
+  <rect x="36" y="292" width="709" height="4" fill="hsl(37 70% 60%)" opacity="0.42" />
+  <rect x="280" y="394" width="696" height="5" fill="hsl(44 70% 60%)" opacity="0.41" />
+  <rect x="38" y="120" width="490" height="4" fill="hsl(51 70% 60%)" opacity="0.60" />
+  <rect x="173" y="71" width="878" height="6" fill="hsl(58 70% 60%)" opacity="0.50" />
+  <rect x="102" y="543" width="951" height="11" fill="hsl(65 70% 60%)" opacity="0.45" />
+  <rect x="200" y="62" width="368" height="8" fill="hsl(72 70% 60%)" opacity="0.33" />
+  <rect x="244" y="397" width="797" height="5" fill="hsl(79 70% 60%)" opacity="0.47" />
+  <rect x="858" y="339" width="231" height="10" fill="hsl(86 70% 60%)" opacity="0.58" />
+  <rect x="872" y="402" width="281" height="4" fill="hsl(93 70% 60%)" opacity="0.49" />
+  <rect x="401" y="398" width="362" height="10" fill="hsl(100 70% 60%)" opacity="0.38" />
+  <rect x="326" y="233" width="448" height="9" fill="hsl(107 70% 60%)" opacity="0.32" />
+  <rect x="7" y="112" width="374" height="5" fill="hsl(114 70% 60%)" opacity="0.23" />
+  <rect x="295" y="581" width="341" height="9" fill="hsl(121 70% 60%)" opacity="0.40" />
+  <rect x="602" y="372" width="457" height="11" fill="hsl(128 70% 60%)" opacity="0.36" />
+  <rect x="164" y="181" width="855" height="11" fill="hsl(135 70% 60%)" opacity="0.73" />
+  <rect x="337" y="542" width="831" height="5" fill="hsl(142 70% 60%)" opacity="0.57" />
+  <rect x="82" y="444" width="940" height="10" fill="hsl(149 70% 60%)" opacity="0.64" />
+  <rect x="152" y="508" width="603" height="6" fill="hsl(156 70% 60%)" opacity="0.70" />
+  <circle cx="1038" cy="162" r="102" fill="none" stroke="hsl(9 80% 65%)" stroke-width="3" opacity="0.7" />
+</svg>
