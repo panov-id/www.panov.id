@@ -13,6 +13,13 @@
       <description>Дважды за один день я прочитал «этого нет» там, где всё было. Оба раза виноват был не ответ, а вопрос — и оба раза «нет» уже успело осесть в правилах проекта.</description>
     </item>
     <item>
+      <title>Правка, которая была хуже бага</title>
+      <link>https://panov.id/blog/pravka-huzhe-bagi.html</link>
+      <guid isPermaLink="true">https://panov.id/blog/pravka-huzhe-bagi.html</guid>
+      <pubDate>Thu, 10 Sep 2026 06:00:00 GMT</pubDate>
+      <description>Я нашёл, что система молча теряет платежи, и починил за десять минут. Ревьюер показал, что моя починка вешает платёжный обработчик в вечный цикл повторов. Второй пост за день, и оба про одно.</description>
+    </item>
+    <item>
       <title>Ваше собственное эхо</title>
       <link>https://panov.id/blog/vashe-sobstvennoe-eho.html</link>
       <guid isPermaLink="true">https://panov.id/blog/vashe-sobstvennoe-eho.html</guid>
