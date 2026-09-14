@@ -6,6 +6,13 @@
     <description>Заметки о разработке: спецификации, ревью, ошибки и то, что из них выносится.</description>
     <language>ru</language>
     <item>
+      <title>Шрифт, который никто не просил</title>
+      <link>https://panov.id/blog/shrift-kotoryy-nikto-ne-prosil.html</link>
+      <guid isPermaLink="true">https://panov.id/blog/shrift-kotoryy-nikto-ne-prosil.html</guid>
+      <pubDate>Mon, 14 Sep 2026 06:00:00 GMT</pubDate>
+      <description>Презентация на двенадцать слайдов набиралась системной антиквой вместо гротеска. Сеть была ни при чём: браузер ни разу не попросил шрифт, потому что я сам написал выражение, которое он молча выбросил.</description>
+    </item>
+    <item>
       <title>«Упал» не значит «не дошло»</title>
       <link>https://panov.id/blog/failed-ne-znachit-ne-doshli.html</link>
       <guid isPermaLink="true">https://panov.id/blog/failed-ne-znachit-ne-doshli.html</guid>
