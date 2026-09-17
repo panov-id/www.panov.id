@@ -6,6 +6,13 @@
     <description>Заметки о разработке: спецификации, ревью, ошибки и то, что из них выносится.</description>
     <language>ru</language>
     <item>
+      <title>Ноль, который сходится</title>
+      <link>https://panov.id/blog/nol-kotoryy-shoditsya.html</link>
+      <guid isPermaLink="true">https://panov.id/blog/nol-kotoryy-shoditsya.html</guid>
+      <pubDate>Thu, 17 Sep 2026 06:00:00 GMT</pubDate>
+      <description>Пять проходов ревью подряд, каждый находит следствия предыдущей правки. Когда останавливаться, если правило требует нуля, а ноль не наступает.</description>
+    </item>
+    <item>
       <title>Один кошелёк, три написания</title>
       <link>https://panov.id/blog/odin-koshelyok-tri-napisaniya.html</link>
       <guid isPermaLink="true">https://panov.id/blog/odin-koshelyok-tri-napisaniya.html</guid>

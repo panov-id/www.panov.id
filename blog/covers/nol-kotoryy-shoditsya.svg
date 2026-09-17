@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="Обложка записи">
+  <rect width="1200" height="630" fill="#0b0b0d" />
+  <rect x="6" y="268" width="628" height="9" fill="hsl(54 70% 60%)" opacity="0.20" />
+  <rect x="6" y="209" width="447" height="2" fill="hsl(61 70% 60%)" opacity="0.25" />
+  <rect x="150" y="230" width="984" height="7" fill="hsl(68 70% 60%)" opacity="0.30" />
+  <rect x="968" y="68" width="170" height="6" fill="hsl(75 70% 60%)" opacity="0.67" />
+  <rect x="387" y="268" width="349" height="5" fill="hsl(82 70% 60%)" opacity="0.21" />
+  <rect x="355" y="379" width="294" height="7" fill="hsl(89 70% 60%)" opacity="0.15" />
+  <rect x="296" y="243" width="827" height="7" fill="hsl(96 70% 60%)" opacity="0.22" />
+  <rect x="392" y="103" width="412" height="5" fill="hsl(103 70% 60%)" opacity="0.39" />
+  <rect x="93" y="90" width="720" height="7" fill="hsl(110 70% 60%)" opacity="0.60" />
+  <rect x="563" y="370" width="299" height="7" fill="hsl(117 70% 60%)" opacity="0.70" />
+  <rect x="354" y="528" width="156" height="2" fill="hsl(124 70% 60%)" opacity="0.58" />
+  <rect x="179" y="256" width="987" height="8" fill="hsl(131 70% 60%)" opacity="0.35" />
+  <rect x="578" y="73" width="548" height="5" fill="hsl(138 70% 60%)" opacity="0.22" />
+  <rect x="288" y="297" width="488" height="6" fill="hsl(145 70% 60%)" opacity="0.33" />
+  <rect x="599" y="278" width="413" height="8" fill="hsl(152 70% 60%)" opacity="0.74" />
+  <rect x="611" y="175" width="429" height="2" fill="hsl(159 70% 60%)" opacity="0.38" />
+  <rect x="959" y="344" width="186" height="10" fill="hsl(166 70% 60%)" opacity="0.43" />
+  <rect x="188" y="161" width="782" height="2" fill="hsl(173 70% 60%)" opacity="0.50" />
+  <rect x="263" y="466" width="874" height="10" fill="hsl(180 70% 60%)" opacity="0.21" />
+  <rect x="144" y="574" width="732" height="4" fill="hsl(187 70% 60%)" opacity="0.22" />
+  <circle cx="1063" cy="137" r="77" fill="none" stroke="hsl(54 80% 65%)" stroke-width="3" opacity="0.7" />
+</svg>
