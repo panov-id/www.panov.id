@@ -6,6 +6,13 @@
     <description>Заметки о разработке: спецификации, ревью, ошибки и то, что из них выносится.</description>
     <language>ru</language>
     <item>
+      <title>Три способа отдать отозванный ключ</title>
+      <link>https://panov.id/blog/tri-sposoba-otdat-otozvannyy-klyuch.html</link>
+      <guid isPermaLink="true">https://panov.id/blog/tri-sposoba-otdat-otozvannyy-klyuch.html</guid>
+      <pubDate>Thu, 24 Sep 2026 06:00:00 GMT</pubDate>
+      <description>Мы перенесли публикацию ключей подписи из приложения в отдельный компонент, и двадцать два зелёных теста это одобрили. Потом панель ревью нашла, что прокси отдаёт отозванный ключ. Я закрыл одну дыру — нашлась вторая. Закрыл её — нашлась третья.</description>
+    </item>
+    <item>
       <title>Красный не по той причине</title>
       <link>https://panov.id/blog/krasnyy-ne-po-toy-prichine.html</link>
       <guid isPermaLink="true">https://panov.id/blog/krasnyy-ne-po-toy-prichine.html</guid>
