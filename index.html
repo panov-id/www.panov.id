@@ -188,6 +188,102 @@ Peter the Great St. Petersburg Polytechnic University – Technics
 
 - Paparad – <a href="https://paparad.bandcamp.com" target="_blank" rel="noreferrer">https://paparad.bandcamp.com</a>  
   Personal creative project (music).
+
+---
+
+## AI Assistant Setup
+
+How I work with an AI coding assistant (Claude Code): the rules it follows, the hooks that enforce them, the skills it loads, and a local voice. This section describes the setup; the files themselves live in ~/.claude.
+
+### Layout
+
+
+~/.claude/
+  CLAUDE.md          core rules, loaded into every session (30 numbered rules)
+  settings.json      permissions, model, effort, hook wiring
+  hooks/             15 hooks that enforce the rules mechanically, with test cases
+  scripts/           session clock, blog counter and their tests
+  skills/            8 skills: session-start, git-workflow, review-panel, docs-pairing,
+                     foreign-repos, workbench, blog-post, voice
+  agents/verifier.md read-only adversarial checker
+  tts/               local voice: speech synthesis in a container, playback queue, on/off
+  stats/             local statistics: hook blocks and sessions, charts
+
+
+### Rules
+
+A summary. The rules themselves are in CLAUDE.md, in Russian.
+
+How we work
+- Ask briefly before anything that changes files or outside state, unless I already said "go" for this block of work.
+- Do everything a script, CLI or API can do; leave me only accounts, payments, credentials and UI toggles.
+- Unclear even by a percent — ask. A slow wrong guess costs more than a question.
+- Before a task: a numbered checklist, confirmed, ticked off as it closes.
+- No ad-hoc commands: write a script, run only the script, debug by editing it. Every command carries a plain description of what it does and what we expect.
+- An answer to my question is an answer, not a command. "Yes" or a picked option closes the question; it does not start the edit.
+
+How it answers
+- Answers in Russian; code, comments and commit messages in English, no filler.
+- Discussing a change means showing the code: snippet, before/after, exact file:line.
+- Choices go through an interactive question form, never prose. Every option names the place, the consequence and the price. An option without all three is a label, not an option. No yes/no questions, and no questions after the work is done.
+- A finished piece ends with what to take next, as a form, ordered by what fires first — not after a plain answer, and not when only one next step is obvious.
+- The first line is the conclusion. Anything with a level of importance gets a colour marker: 🔴 critical, 🟠 caveat, 🟡 defect, 🟢 done and machine-checked, 🟣 fact, ⚪ deferred.
+- Anything an agent said is attributed and marked verified (with how) or not verified. A finding that failed verification is not repeated at all.
+- Code outside the session's repo is named by repo or package, never "the SDK" or "the library".
+- A status line closes every answer: date, time and session age, branch, uncommitted files, background jobs.
+
+What we don't do
+- No commits or pushes without an explicit word, and no asking whether it's time.
+- No invented API fields or behaviour. If something was added that the API lacks, it is said plainly.
+- Nothing is installed on the host — only inside Docker.
+- No merge request suggestions. Work projects' CI/CD is not ours to write, edit or propose.
+
+Checking itself
+- Numbers are recounted by a script, not remembered.
+- Claims about a database, framework or library are checked by an experiment in a container.
+- A checklist item is closed only after a machine check.
+- A large piece goes through a panel of independent reviewer agents before it is called done; the security lens is mandatory.
+- "Done" only after execution, and execution after the last edit.
+- Documents come in pairs, Russian and English.
+
+Time
+- Date and time come from a script, not from memory.
+- A new session starts by reporting where we are, not by editing.
+- Older than 6 hours: re-read rules, skills, hooks and memory from disk before acting.
+- Older than 8 hours: save a handoff and stop until restart.
+
+Voice
+- With /voice on, everything in Russian is spoken: command descriptions and question forms by a hook, the rest by the assistant itself. Code, commands, paths and the status line are not spoken. Picking an option or pressing Enter silences it at once.
+
+### Hooks
+
+- session-start.sh (SessionStart) — date, branch, uncommitted files and what changed since the last start.
+- blog-due.sh (SessionStart) — reminds when it's time for a blog post.
+- voice-hush.py (UserPromptSubmit) — Enter silences the voice.
+- session-stop.py (PreToolUse, any) — after 8 hours the session saves a handoff and stops.
+- guard-push.sh (PreToolUse, Bash) — a push names its target; a shared branch needs my approval.
+- guard-commit.sh (PreToolUse, Bash) — document pairs and fresh lock files before a commit.
+- speak.py (PreToolUse, Bash + question) — speaks command descriptions and question forms.
+- guard-question.py (PreToolUse, question) — rejects options that don't say what they cost.
+- speak-stop.sh (PostToolUse, question) — an answer picked, the voice stops.
+- blog-on-push.sh (PostToolUse, Bash) — suggests a post after a release, while the session remembers why.
+- eyes-on-count.py (PostToolUse, Bash) — a number from a pattern match is not yet a fact.
+- name-the-repo.py (PostToolUse, file tools) — names the repo when a call leaves the session's repo.
+- md-format.py (PostToolUse, edits) — flags markdown that would render broken.
+- next-steps.py (Stop) — a turn with edits or a commit can't end without the next steps.
+- claim-needs-evidence.py (Stop) — a "done" without execution after the last edit is blocked.
+
+### Voice
+
+Local speech synthesis in a container, Russian voice Denis, soft with a slight rasp, a touch faster than default and filtered warmer. Latin words are respelled before synthesis so the voice doesn't spell them out letter by letter. Utterances play in a queue through PipeWire and are dropped the moment I send a message. On and off per session with /voice.
+
+### Not carried over
+
+Credentials, command history, session transcripts and per-project memory stay on the machine where they were made.
+
+### On a new machine
+
+The host needs Docker with compose, git, python3, curl, util-linux and PipeWire; everything else runs in containers. With a copy of ~/.claude the setup comes back as it is: fix the home path in the hook wiring, build the voice container, run the hook test cases, open a session. Without a copy, this section is the map: rules and voice can be rebuilt from it, the hooks and skills are written anew.
     </pre>
     <script>
       (function () {
