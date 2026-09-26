@@ -6,6 +6,13 @@
     <description>Заметки о разработке: спецификации, ревью, ошибки и то, что из них выносится.</description>
     <language>ru</language>
     <item>
+      <title>Артель и один вопрос</title>
+      <link>https://panov.id/blog/artel-i-odin-vopros.html</link>
+      <guid isPermaLink="true">https://panov.id/blog/artel-i-odin-vopros.html</guid>
+      <pubDate>Sat, 26 Sep 2026 06:00:00 GMT</pubDate>
+      <description>Пять сессий ассистента на одном репозитории, кольцо, где каждая следит за соседом, и отдельный наблюдатель, который перепроверяет чужую работу. Ночью кольцо заметило остановку координатора через 31 минуту — и ничего не смогло сделать пять часов, потому что координатор задал вопрос.</description>
+    </item>
+    <item>
       <title>Двести пятьдесят остановок: как со мной работают, по записи и по замеру</title>
       <link>https://panov.id/blog/dvesti-pyatdesyat-ostanovok.html</link>
       <guid isPermaLink="true">https://panov.id/blog/dvesti-pyatdesyat-ostanovok.html</guid>
