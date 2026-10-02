@@ -6,6 +6,13 @@
     <description>Заметки о разработке: спецификации, ревью, ошибки и то, что из них выносится.</description>
     <language>ru</language>
     <item>
+      <title>Три зелёных теста одной гонки</title>
+      <link>https://panov.id/blog/tri-zelyonykh-testa-odnoy-gonki.html</link>
+      <guid isPermaLink="true">https://panov.id/blog/tri-zelyonykh-testa-odnoy-gonki.html</guid>
+      <pubDate>Fri, 02 Oct 2026 06:00:00 GMT</pubDate>
+      <description>Тест на гонку двух параллельных входов был зелёным при сломанном коде три раза подряд, и каждый раз по своей причине. Последнюю не мог увидеть ни один тест набора: она жила между двумя соединениями с базой. Разбор, почему тест на одном соединении доказывает про гонку меньше, чем кажется, и что с этим делать, если второго соединения в наборе нет.</description>
+    </item>
+    <item>
       <title>Артель и холостые тики</title>
       <link>https://panov.id/blog/artel-i-kholostye-tiki.html</link>
       <guid isPermaLink="true">https://panov.id/blog/artel-i-kholostye-tiki.html</guid>
