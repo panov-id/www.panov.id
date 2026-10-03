@@ -6,6 +6,13 @@
     <description>Заметки о разработке: спецификации, ревью, ошибки и то, что из них выносится.</description>
     <language>ru</language>
     <item>
+      <title>Письмо, которое не пришло ни разу</title>
+      <link>https://panov.id/blog/pismo-kotoroe-ne-prishlo.html</link>
+      <guid isPermaLink="true">https://panov.id/blog/pismo-kotoroe-ne-prishlo.html</guid>
+      <pubDate>Sat, 03 Oct 2026 06:00:00 GMT</pubDate>
+      <description>Спецификация обещала письмо, когда у человека кончаются резервные коды. Я его сделал, обосновал условие отправки — и обоснование оказалось неверным: при параллельной трате письмо терялось навсегда. Потом выяснилось, что «запасного пути» в консоли, на который я сослался в записи решения, не существует. А на стенде письмо так и не пришло ни разу. Разбор о том, почему уведомление — слабый канал для важного, и что поймала проверка, а не я.</description>
+    </item>
+    <item>
       <title>Три зелёных теста одной гонки</title>
       <link>https://panov.id/blog/tri-zelyonykh-testa-odnoy-gonki.html</link>
       <guid isPermaLink="true">https://panov.id/blog/tri-zelyonykh-testa-odnoy-gonki.html</guid>
