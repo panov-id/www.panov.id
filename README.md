@@ -149,7 +149,7 @@ How I work with an AI coding assistant (Claude Code), with a second CLI assistan
   CLAUDE.md          core rules, loaded into every session (33 numbered rules)
   settings.json      permissions, model, hook wiring
   hooks/             23 hooks that enforce the rules mechanically, each with a case file
-  scripts/           session clock, blog counter, digest, token report, codex wrapper
+  scripts/           session clock, blog counter, digest, token report, codex wrapper, pdf-pages
   skills/            11 skills: session-start, git-workflow, review-panel, docs-pairing,
                      foreign-repos, workbench, blog-post, voice, delegate, artel, synced
   agents/            haiku-runner, sonnet-runner (cheap executors), verifier (read-only checker)
@@ -199,6 +199,7 @@ A summary. The rules themselves are in `CLAUDE.md`, in Russian.
 - Noisy output — test runs, static analysis, container logs, diffs, HTTP journals — is never read raw. It goes through `digest <kind>`: at most 12 lines, the full text saved to a session file, the path named. A hook refuses a noisy command without it.
 - A big file is read in part or not at all: a hook refuses an image over 200 KB, a PDF without a page range, a text file over 64 KB without a window. The measurement behind it: over a week, 70 % of all tool-result bytes were reads of the session's own PDF reports and screenshots; test runs were not in the top twelve.
 - Work is routed by kind, and a hook enforces the routing: mechanical steps with a machine check go to `haiku-runner`, module-sized work to a spec to `sonnet-runner`, a ready diff plan or template generation to the second assistant through `codex-run` (same task template: goal, files, steps, forbidden, check; sandbox without network; back comes a diffstat, a flag on any file outside the list, and the digest of the check). The main model keeps decisions, security and review.
+- PDFs over five pages and screenshots of mockups are read by `haiku-runner`, not by the main model: back comes a summary of at most 20 lines, not the file. A text PDF goes through `pdftotext`; a mockup PDF, whose letters are outlined and have no text layer, is cut into PNG pages by `pdf-pages` at whatever resolution fits under the 200 KB image limit. Trial on 08.10.2026: a 3-page status report, 12 of 12 quoted numbers found in the file; a poster mockup, headline, caption, URL and QR matched, and the one label it could not read was marked unread, not guessed.
 - `token-report --days N` reads the session transcripts and shows where the bytes went: per day, per tool, top sources. A saving is claimed only with its number.
 
 **Time**
