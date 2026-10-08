@@ -12,7 +12,7 @@
 #   scripts/shot.sh blog/<слаг>.html out.png
 set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-IMAGE="${SHOT_IMAGE:-mcr.microsoft.com/playwright:v1.52.0-noble}"
+IMAGE="${SHOT_IMAGE:-mcr.microsoft.com/playwright:v1.55.0-noble}"  # the tag that is on the machine (08.10.2026); v1.52 pulled 2.6 GB for nothing
 PAGE="${1:-blog/index.html}"
 OUT="${2:-/tmp/blog-shot.png}"
 SIZE="${SHOT_SIZE:-1200,1700}"
