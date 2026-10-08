@@ -19,6 +19,20 @@ ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 SITE="${SITE_URL:-https://panov.id}"
 BUNNY_ENV="${BUNNY_ENV:-$HOME/Projects/panov-id/xor.ad/deploy/.env.deploy}"
 
+# wait_uploaded <url> <epoch>: wait up to 5 min until the origin copy of <url> (bypassing the
+# edge cache with a query string) has Last-Modified at or after <epoch>.
+wait_uploaded() {
+  local url=$1 since=$2 lm t
+  for _ in $(seq 1 20); do
+    lm=$(curl -sI "$url?x=$RANDOM" | tr -d '\r' | awk -F': ' 'tolower($1)=="last-modified"{print $2}')
+    t=$(date -d "${lm:-1970-01-01}" +%s)
+    [ "$t" -ge "$since" ] && { echo "+ выложено $url ($lm)"; return 0; }
+    sleep 15
+  done
+  echo "✗ за 5 минут не обновился $url (last-modified: ${lm:-нет})" >&2; return 1
+}
+[ "${1:-}" = "--selftest-wait" ] && { wait_uploaded "$2" "$3"; exit $?; }
+
 slug=${1:?slug}; shift
 msg=""; send=0; shot=1
 while [ $# -gt 0 ]; do
@@ -71,12 +85,18 @@ git commit -q -m "$msg
 
 Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>"
 echo "+ коммит $(git log --oneline -1)"
+pushed_at=$(date +%s)
 git push origin main:refs/heads/main 2>&1 | tail -1
 
 live="$SITE/$page"
 echo "@@ жду выкладки $live"
 timeout 300 bash -c "until curl -sf -H 'Cache-Control: no-cache' \"$live?x=\$RANDOM\" | grep -qF \"$title\"; do sleep 15; done" \
   || { echo "✗ за 5 минут страница не появилась: $live" >&2; exit 5; }
+
+# The deploy uploads the post page before index.html and the blog list; purging "/" before
+# they land re-caches the old card for ~296 days (seen 08.10.2026: "/" cached 13 s too early).
+wait_uploaded "$SITE/index.html" "$pushed_at" || exit 5
+wait_uploaded "$SITE/blog/index.html" "$pushed_at" || exit 5
 
 if [ -f "$BUNNY_ENV" ]; then
   set -a; . "$BUNNY_ENV"; set +a
