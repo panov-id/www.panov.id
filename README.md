@@ -146,13 +146,16 @@ How I work with an AI coding assistant (Claude Code), with a second CLI assistan
 
 ```
 ~/.claude/
-  CLAUDE.md          core rules, loaded into every session (33 numbered rules)
+  CLAUDE.md          core rules, loaded into every session (37 numbered rules, one retired)
   settings.json      permissions, model, hook wiring
-  hooks/             23 hooks that enforce the rules mechanically, each with a case file
+  hooks/             30 hooks that enforce the rules mechanically, most with a case file
   scripts/           session clock, blog counter, digest, token report, codex wrapper, pdf-pages
-  skills/            11 skills: session-start, git-workflow, review-panel, docs-pairing,
-                     foreign-repos, workbench, blog-post, voice, delegate, artel, synced
-  agents/            haiku-runner, sonnet-runner (cheap executors), verifier (read-only checker)
+  skills/            11 skills plus a synced folder: session-start, git-workflow, review-panel, docs-pairing,
+                     foreign-repos, workbench, blog-post, voice, delegate, artel, goal-steps
+  agents/            haiku-runner, sonnet-runner (cheap executors), verifier (read-only checker),
+                     karma-judge (reads every recorded failure before a reply goes out)
+  failures.md        every slip: blocked attempts written by hooks, the rest by hand, in classes
+  wins.md            every pattern the owner explicitly approved
   templates/         the rules block that is stitched into every project's instructions
   tts/               local voice: speech synthesis in a container, playback queue, on/off
   stats/             local statistics: hook blocks and sessions, charts
@@ -195,6 +198,11 @@ A summary. The rules themselves are in `CLAUDE.md`, in Russian.
 - "Does not touch the network" is proven by a run in a container without a network, not by a comment. A 401/403/429 from a foreign API stops everything at once.
 - Documents come in pairs, Russian and English.
 
+**Failures and approvals** (added 13.10.2026)
+- Every slip becomes a line in `failures.md`: date, where, what, and, when the owner caught it, his words verbatim. Hooks add a line for each attempt they block; the rest I add by hand. The lines are grouped into classes, and every class with every case rides into every prompt in full — no trimming to save bytes.
+- Every explicit approval ("yes, like this") becomes a line in `wins.md` and rides along the same way. I never credit myself: a hook lets into `wins.md` only quotes the owner actually said in the session or in the project's last two weeks, and any quote in a `failures.md` line I write must be his too.
+- A turn with an edit, a commit, a question form or a "done" goes past `karma-judge` first: a second, read-only agent loads both files and the core rules in full and judges the draft — pass, redo, or "could not read, will not judge". A hook reads the verdict, not just the call; an edit after the verdict voids it. Two refusals in a row let the turn through: a broken gate slows work, never locks it.
+
 **Token economy** (added 08.10.2026)
 - Noisy output — test runs, static analysis, container logs, diffs, HTTP journals — is never read raw. It goes through `digest <kind>`: at most 12 lines, the full text saved to a session file, the path named. A hook refuses a noisy command without it.
 - A big file is read in part or not at all: a hook refuses an image over 200 KB, a PDF without a page range, a text file over 64 KB without a window. The measurement behind it: over a week, 70 % of all tool-result bytes were reads of the session's own PDF reports and screenshots; test runs were not in the top twelve.
@@ -230,8 +238,13 @@ A summary. The rules themselves are in `CLAUDE.md`, in Russian.
 - `md-format.py` (PostToolUse, edits) — flags markdown that would render broken.
 - `owner-present.py` — notices the owner at the terminal and relaxes the stop-time gates for a quarter of an hour.
 - `next-steps.py`, `claim-needs-evidence.py` (Stop) — a turn with edits can't end without the next steps; a "done" without execution after the last edit is blocked.
+- `failures-remind.py` (UserPromptSubmit) — every failure class with every case, and every approval, in front of each reply.
+- `guard-ledger.py` (PreToolUse, edits) — `failures.md` and `wins.md` take only quotes the owner actually said.
+- `karma-gate.py` (Stop, question) — no edit, question form or "done" without a passing verdict from `karma-judge`.
+- `guard-inline-command.py` (PreToolUse, Bash) — a long or many-link one-off command goes into a script file.
+- `gates-run.py`, `gates-report.py` (Stop, UserPromptSubmit) — the project's offline checks run in the background after an edit; only their exit codes come back.
 
-Every hook has a `*.cases.py` file beside it, and every block it makes is recorded in the local stats.
+Most hooks have a `*.cases.py` file beside them, and every block it makes is recorded in the local stats.
 
 ### Voice
 
