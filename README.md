@@ -140,7 +140,7 @@ Looking for new opportunities as **Full Stack Engineer**, **PHP Backend Develope
 
 ## AI Assistant Setup
 
-How I work with an AI coding assistant. Seven approaches, each with what it is and why.
+How I work with an AI coding assistant. Eight approaches, each with what it is and why.
 
 **1. Rules are enforced by hooks, not by memory.**
 What: a short core of rules loaded into every session, and small scripts on the assistant's events that refuse a step breaking a rule.
@@ -166,7 +166,11 @@ Why: work that drifts to a neighbouring problem passes every quality check — i
 What: a small local database the assistant queries instead of grepping files: my messages and corrections, decisions, the rules, skills, docs and review notes, per project. It answers "was this already decided?", "where did I slip on this file?", and a new session starts from "where did we stop?" — the last turns in my own words.
 Why: asking me what I already answered, or repeating a fixed mistake, costs more than a lookup. Command output never goes in, so no secrets.
 
-**7. Cheap work goes to cheap models; the decision stays with me.**
+**7. A map of the project instead of searching it.**
+What: a generator — shared, or the project's own where its stack needs one — draws what links to what — code, database, documents — checks every link against the disk while building, and writes a diff to a journal when something changes.
+Why: searching the code anew every session is slow and misses links. A map built from the project itself and checked on every build can be read in a minute and trusted.
+
+**8. Cheap work goes to cheap models; the decision stays with me.**
 What: mechanical steps with a machine check go to small executor agents; noisy output is read through a 12-line digest; I am asked only about money, accounts, irreversible actions and product forks — never about technique.
 Why: tokens and my attention are the two scarce resources. Everything else the assistant decides, writes down, and reports with numbers.
 
