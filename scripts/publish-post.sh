@@ -18,20 +18,28 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 SITE="${SITE_URL:-https://panov.id}"
 BUNNY_ENV="${BUNNY_ENV:-$HOME/Projects/panov-id/xor.ad/deploy/.env.deploy}"
+REPO="${REPO:-panov-id/www.panov.id}"
 
-# wait_uploaded <url> <epoch>: wait up to 5 min until the origin copy of <url> (bypassing the
-# edge cache with a query string) has Last-Modified at or after <epoch>.
-wait_uploaded() {
-  local url=$1 since=$2 lm t
-  for _ in $(seq 1 20); do
-    lm=$(curl -sI "$url?x=$RANDOM" | tr -d '\r' | awk -F': ' 'tolower($1)=="last-modified"{print $2}')
-    t=$(date -d "${lm:-1970-01-01}" +%s)
-    [ "$t" -ge "$since" ] && { echo "+ выложено $url ($lm)"; return 0; }
+# wait_deployed <sha>: wait up to 10 min for the deploy workflow run of <sha> to finish.
+# The edge ignores query strings (13.10.2026: index.html?cb=<time> came back as a HIT cached
+# the day before), so Last-Modified seen through it cannot tell an upload happened; the run
+# itself can. A finished run means every file is on the storage zone.
+wait_deployed() {
+  local sha=$1 state
+  set -a; . "$BUNNY_ENV"; set +a
+  for _ in $(seq 1 40); do
+    state=$(curl -sS -H "Authorization: Bearer ${GITHUB_TOKEN:?}" \
+      "https://api.github.com/repos/$REPO/actions/runs?head_sha=$sha&per_page=5" \
+      | python3 -c 'import sys,json; r=json.load(sys.stdin).get("workflow_runs") or [{}]; print(r[0].get("status"), r[0].get("conclusion"))')
+    case $state in
+      "completed success") echo "+ выкладка $sha завершена"; return 0;;
+      completed\ *) echo "✗ выкладка $sha: $state" >&2; return 1;;
+    esac
     sleep 15
   done
-  echo "✗ за 5 минут не обновился $url (last-modified: ${lm:-нет})" >&2; return 1
+  echo "✗ за 10 минут выкладка $sha не завершилась (${state:-нет прогона})" >&2; return 1
 }
-[ "${1:-}" = "--selftest-wait" ] && { wait_uploaded "$2" "$3"; exit $?; }
+[ "${1:-}" = "--selftest-wait" ] && { wait_deployed "$2"; exit $?; }
 
 slug=${1:?slug}; shift
 msg=""; send=0; shot=1
@@ -85,22 +93,19 @@ git commit -q -m "$msg
 
 Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>"
 echo "+ коммит $(git log --oneline -1)"
-pushed_at=$(date +%s)
 git push origin main:refs/heads/main 2>&1 | tail -1
 
 live="$SITE/$page"
 echo "@@ жду выкладки $live"
-timeout 300 bash -c "until curl -sf -H 'Cache-Control: no-cache' \"$live?x=\$RANDOM\" | grep -qF \"$title\"; do sleep 15; done" \
-  || { echo "✗ за 5 минут страница не появилась: $live" >&2; exit 5; }
-
-# The deploy uploads the post page before index.html and the blog list; purging "/" before
-# they land re-caches the old card for ~296 days (seen 08.10.2026: "/" cached 13 s too early).
-wait_uploaded "$SITE/index.html" "$pushed_at" || exit 5
-wait_uploaded "$SITE/blog/index.html" "$pushed_at" || exit 5
+# Purging before every file has landed re-caches the old copy for ~296 days (seen 08.10.2026:
+# "/" cached 13 s too early), so the purge waits for the whole deploy run.
+[ -f "$BUNNY_ENV" ] || { echo "✗ нет $BUNNY_ENV — ни дождаться выкладки, ни сбросить кэш" >&2; exit 5; }
+wait_deployed "$(git rev-parse HEAD)" || exit 5
 
 if [ -f "$BUNNY_ENV" ]; then
   set -a; . "$BUNNY_ENV"; set +a
-  for u in "$SITE/" "$SITE/blog/" "$SITE/feed.xml" "$live"; do
+  # "/" and "/index.html" are separate cache keys at the edge, as are "/blog/" and its index.
+  for u in "$SITE/" "$SITE/index.html" "$SITE/blog/" "$SITE/blog/index.html" "$SITE/feed.xml" "$live"; do
     enc=$(printf '%s' "$u" | python3 -c 'import sys,urllib.parse; print(urllib.parse.quote(sys.stdin.read(), safe=""))')
     code=$(curl -sS -o /dev/null -w '%{http_code}' -X POST "https://api.bunny.net/purge?url=${enc}&async=false" -H "AccessKey: ${BUNNY_API_KEY:?}")
     echo "+ кэш сброшен $u → $code"
@@ -109,6 +114,8 @@ else
   echo "! нет $BUNNY_ENV — кэш не сброшен, пост виден только по прямой ссылке"
 fi
 
-curl -sf -H 'Cache-Control: no-cache' "$SITE/blog/?x=$RANDOM" | grep -qF "$slug.html" \
+curl -sf "$live" | grep -qF "$title" \
+  || { echo "✗ на $live нет заголовка «$title»" >&2; exit 5; }
+curl -sf "$SITE/blog/" | grep -qF "$slug.html" \
   && echo "+ в ленте блога: $SITE/blog/" || { echo "✗ в $SITE/blog/ поста нет" >&2; exit 6; }
 echo "+ опубликовано: $live"
