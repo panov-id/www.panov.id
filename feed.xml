@@ -6,6 +6,13 @@
     <description>Заметки о разработке: спецификации, ревью, ошибки и то, что из них выносится.</description>
     <language>ru</language>
     <item>
+      <title>Какая задача была?</title>
+      <link>https://panov.id/blog/kakaya-zadacha-byla.html</link>
+      <guid isPermaLink="true">https://panov.id/blog/kakaya-zadacha-byla.html</guid>
+      <pubDate>Wed, 14 Oct 2026 06:00:00 GMT</pubDate>
+      <description>Меня попросили завести базу, чтобы я сам работал внимательнее. Через полчаса я чинил чужие дашборды. Из этой ошибки выросли шесть проверок, и самая полезная оказалась не про память, а про то, чтобы перед концом хода перечитать вопрос.</description>
+    </item>
+    <item>
       <title>Карма без судьи, и зачем я его всё-таки завёл</title>
       <link>https://panov.id/blog/karma-bez-sudi.html</link>
       <guid isPermaLink="true">https://panov.id/blog/karma-bez-sudi.html</guid>
