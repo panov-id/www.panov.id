@@ -216,8 +216,8 @@ What: at the end of each turn a cheap model compares what was done with my last 
 Why: work that drifts to a neighbouring problem passes every quality check — it is good work on the wrong thing.
 
 6. A working memory the assistant queries itself.
-What: a small local database of my messages, decisions and corrections per project: "was this already decided?", "where did I slip on this file?", "where did we stop?".
-Why: asking me what I already answered, or repeating a fixed mistake, costs more than a lookup. Only my words go in — never command output, so no secrets.
+What: a small local database the assistant queries instead of grepping files: my messages and corrections, decisions, the rules, skills, docs and review notes, per project. It answers "was this already decided?", "where did I slip on this file?", and a new session starts from "where did we stop?" — the last turns in my own words.
+Why: asking me what I already answered, or repeating a fixed mistake, costs more than a lookup. Command output never goes in, so no secrets.
 
 7. Cheap work goes to cheap models; the decision stays with me.
 What: mechanical steps with a machine check go to small executor agents; noisy output is read through a 12-line digest; I am asked only about money, accounts, irreversible actions and product forks — never about technique.
