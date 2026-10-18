@@ -42,11 +42,12 @@ wait_deployed() {
 [ "${1:-}" = "--selftest-wait" ] && { wait_deployed "$2"; exit $?; }
 
 slug=${1:?slug}; shift
-msg=""; send=0; shot=1
+msg=""; send=0; shot=1; purge=0
 while [ $# -gt 0 ]; do
   case $1 in
     -m) msg=$2; shift 2;;
     --send) send=1; shift;;
+    --purge) purge=1; send=1; shot=0; shift;;  # already pushed: wait deploy, purge, verify
     --no-shot) shot=0; shift;;
     *) echo "unknown $1" >&2; exit 2;;
   esac
@@ -82,9 +83,9 @@ if [ $send = 0 ]; then
   echo "@@ не отправлено: посмотри снимок, затем --send -m \"Post: ...\"  # approved: main"
   exit 0
 fi
-[ -n "$msg" ] || { echo "✗ --send требует -m \"Post: ...\"" >&2; exit 2; }
-
 cd "$ROOT"
+if [ $purge = 0 ]; then
+[ -n "$msg" ] || { echo "✗ --send требует -m \"Post: ...\"" >&2; exit 2; }
 paths=("content/posts/$(basename "$post")" blog feed.xml index.html)
 git diff --quiet -- README.md || paths+=(README.md)
 git add -- "${paths[@]}"
@@ -94,13 +95,15 @@ git commit -q -m "$msg
 Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>"
 echo "+ коммит $(git log --oneline -1)"
 git push origin main:refs/heads/main 2>&1 | tail -1
+fi
 
 live="$SITE/$page"
 echo "@@ жду выкладки $live"
 # Purging before every file has landed re-caches the old copy for ~296 days (seen 08.10.2026:
 # "/" cached 13 s too early), so the purge waits for the whole deploy run.
 [ -f "$BUNNY_ENV" ] || { echo "✗ нет $BUNNY_ENV — ни дождаться выкладки, ни сбросить кэш" >&2; exit 5; }
-wait_deployed "$(git rev-parse HEAD)" || exit 5
+# --purge: HEAD may be a commit with no deploy run (scripts-only), so there is nothing to wait for.
+[ $purge = 1 ] || wait_deployed "$(git rev-parse HEAD)" || exit 5
 
 if [ -f "$BUNNY_ENV" ]; then
   set -a; . "$BUNNY_ENV"; set +a
