@@ -127,8 +127,14 @@ Senior Full Stack инженер с опытом **10+ лет**: строю ма
 - **NEIGHBRO** – `https://neighbro.place`  
   Хорошие соседи. Настоящие моменты.
 
-- **Waste Collection in Cyprus** – `https://wastecollectioncyprus.com`  
+- **Waste Collection in Cyprus** – `https://www.instagram.com/waste.collection.cyprus/`  
   Сервис для управления информацией о вывозе отходов на Кипре и её оптимизации.
+
+- **SACRED GARDEN** – `https://www.instagram.com/sacred_garden_cyprus/`  
+  Рейв-площадка у деревни YOO в Лимассоле.
+
+- **NOROOF** – `https://www.instagram.com/noroof_club_cyprus/`  
+  Рейв-площадка на карьере недалеко от Белых камней.
 
 - **Psytican** – `https://psytican.com`  
   Веб-приложение в области психического здоровья и психологии.
