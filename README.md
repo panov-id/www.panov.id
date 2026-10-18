@@ -127,8 +127,14 @@ Looking for new opportunities as **Full Stack Engineer**, **PHP Backend Develope
 - **NEIGHBRO** – `https://neighbro.place`  
   Good neighbours. Real moments.
 
-- **Waste Collection in Cyprus** – `https://wastecollectioncyprus.com`  
+- **Waste Collection in Cyprus** – `https://www.instagram.com/waste.collection.cyprus/`  
   Service for managing and optimizing waste collection information in Cyprus.
+
+- **SACRED GARDEN** – `https://www.instagram.com/sacred_garden_cyprus/`  
+  Rave venue near the village of YOO, Limassol.
+
+- **NOROOF** – `https://www.instagram.com/noroof_club_cyprus/`  
+  Rave venue in a quarry near the White Stones.
 
 - **Psytican** – `https://psytican.com`  
   Web application in the mental health / psychology domain.
