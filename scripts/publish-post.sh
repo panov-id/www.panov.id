@@ -114,8 +114,17 @@ else
   echo "! нет $BUNNY_ENV — кэш не сброшен, пост виден только по прямой ссылке"
 fi
 
-curl -sf "$live" | grep -qF "$title" \
-  || { echo "✗ на $live нет заголовка «$title»" >&2; exit 5; }
-curl -sf "$SITE/blog/" | grep -qF "$slug.html" \
-  && echo "+ в ленте блога: $SITE/blog/" || { echo "✗ в $SITE/blog/ поста нет" >&2; exit 6; }
+# Edge nodes pick up the purge with a lag: right after it /blog/ was seen without
+# the post and with it 20 s later (13.10.2026, twice). Retry before failing.
+seen() {  # url needle
+  for _ in 1 2 3 4 5 6 7 8 9; do
+    curl -sf "$1" | grep -qF "$2" && return 0
+    sleep 10
+  done
+  return 1
+}
+seen "$live" "$title" \
+  || { echo "✗ на $live нет заголовка «$title» за 90 с" >&2; exit 5; }
+seen "$SITE/blog/" "$slug.html" \
+  && echo "+ в ленте блога: $SITE/blog/" || { echo "✗ в $SITE/blog/ поста нет за 90 с" >&2; exit 6; }
 echo "+ опубликовано: $live"
