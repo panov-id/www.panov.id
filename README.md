@@ -128,7 +128,7 @@ Looking for new opportunities as **Full Stack Engineer**, **PHP Backend Develope
   Good neighbours. Real moments.
 
 - **Waste Collection in Cyprus** – `https://www.instagram.com/waste.collection.cyprus/`  
-  Service for managing and optimizing waste collection information in Cyprus.
+  A 100% crowdfunding project: we gather donations and pay honest people who collect trash from the streets of Cyprus €2 per bag.
 
 - **SACRED GARDEN** – `https://www.instagram.com/sacred_garden_cyprus/`  
   Rave venue near the village of YOO, Limassol.
