@@ -6,6 +6,13 @@
     <description>Заметки о разработке: спецификации, ревью, ошибки и то, что из них выносится.</description>
     <language>ru</language>
     <item>
+      <title>Описание — это пожелание</title>
+      <link>https://panov.id/blog/opisanie-eto-pozhelanie.html</link>
+      <guid isPermaLink="true">https://panov.id/blog/opisanie-eto-pozhelanie.html</guid>
+      <pubDate>Mon, 19 Oct 2026 06:00:00 GMT</pubDate>
+      <description>У ассистента тринадцать навыков, и каждый подключается, когда модель сама вспомнит. Замер за неделю: коммит в 64 сессиях, навык про коммиты загружен в 14. Описание оказалось пожеланием, а событие, которое видит хук, — правилом. По дороге гейт дважды остановил меня самого, один раз зря.</description>
+    </item>
+    <item>
       <title>Два ответа на одно имя</title>
       <link>https://panov.id/blog/dva-otveta-na-odno-imya.html</link>
       <guid isPermaLink="true">https://panov.id/blog/dva-otveta-na-odno-imya.html</guid>
