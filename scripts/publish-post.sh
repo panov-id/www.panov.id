@@ -72,10 +72,10 @@ if [ $shot = 1 ]; then
 import os, sys
 from PIL import Image
 im = Image.open(sys.argv[1]); im.thumbnail((600, 1000)); im.save(sys.argv[2])
-print(f"+ смотреть: {sys.argv[2]} {im.size[0]}x{im.size[1]} {os.path.getsize(sys.argv[2]) // 1024} KB")
+print(f"+ check: {sys.argv[2]} {im.size[0]}x{im.size[1]} {os.path.getsize(sys.argv[2]) // 1024} KB")
 EOF
   else
-    echo "! PIL нет — ужатой копии нет, смотреть $out/$slug.png"
+    echo "! no PIL: no reduced copy, check $out/$slug.png"
   fi
 fi
 
@@ -130,4 +130,4 @@ seen "$live" "$title" \
   || { echo "✗ на $live нет заголовка «$title» за 90 с" >&2; exit 5; }
 seen "$SITE/blog/" "$slug.html" \
   && echo "+ в ленте блога: $SITE/blog/" || { echo "✗ в $SITE/blog/ поста нет за 90 с" >&2; exit 6; }
-echo "+ опубликовано: $live"
+echo "+ published: $live"
