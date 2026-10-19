@@ -199,7 +199,11 @@ Peter the Great St. Petersburg Polytechnic University – Technics
 
 ## AI Assistant Setup
 
-How I work with an AI coding assistant. Eight approaches, each with what it is and why.
+How I work with an AI coding assistant. Nine approaches, each with what it is and why.
+
+0. Commands, not guessed words.
+What: a message without a command is talk — the assistant answers in words and every edit is refused that turn. Work opens only on /go, and the answer starts with "understood as …". /commit and /push allow exactly one commit or push within ten minutes, never by a sub-agent. /q, /iq, /redo, /stop, /fail, /win, /mem cover questions, restating, stopping and the ledgers.
+Why: hooks that guessed intent from words kept misreading — a question taken for an order, a picked option for a question. A typed command is read exactly; the session's first reply lists them.
 
 1. Rules are enforced by hooks, not by memory.
 What: a short core of rules loaded into every session, and small scripts on the assistant's events that refuse a step breaking a rule.
