@@ -65,7 +65,7 @@ page="blog/$slug.html"
 echo "+ собрано: $page, обложка есть"
 
 if [ $shot = 1 ]; then
-  out=${SHOT_DIR:-$(ls -td /tmp/claude-1000/*/*/scratchpad 2>/dev/null | head -1)}; out=${out:-/tmp}
+  out=${SHOT_DIR:-$(ls -td /tmp/claude-1000/*/*/scratchpad 2>/dev/null | sed -n 1p)}; out=${out:-/tmp}
   SHOT_SIZE="${SHOT_SIZE:-900,1500}" timeout 180 "$ROOT/scripts/shot.sh" "$page" "$out/$slug.png" | tail -1
   if python3 -c 'import PIL' 2>/dev/null; then
     python3 - "$out/$slug.png" "$out/$slug-small.png" <<'EOF'
