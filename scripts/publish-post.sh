@@ -41,6 +41,22 @@ wait_deployed() {
 }
 [ "${1:-}" = "--selftest-wait" ] && { wait_deployed "$2"; exit $?; }
 
+# Edge nodes pick up the purge with a lag: right after it /blog/ was seen without
+# the post and with it 20 s later (13.10.2026, twice); 27.10.2026 /blog/ took more than 90 s.
+# seen <url> <needle>: retry every 10 s, SEEN_TRIES times (default 36 = 6 min), before failing.
+SEEN_TRIES=${SEEN_TRIES:-36}
+seen() {
+  for _ in $(seq 1 "$SEEN_TRIES"); do
+    curl -sf "$1" | grep -qF "$2" && return 0
+    sleep 10
+  done
+  return 1
+}
+[ "${1:-}" = "--selftest-seen" ] && {
+  if seen "$2" "$3"; then echo "+ найдено: $3"; exit 0; fi
+  echo "✗ на $2 нет «$3» за $((SEEN_TRIES * 10)) с" >&2; exit 1
+}
+
 slug=${1:?slug}; shift
 msg=""; send=0; shot=1; purge=0
 while [ $# -gt 0 ]; do
@@ -117,17 +133,8 @@ else
   echo "! нет $BUNNY_ENV — кэш не сброшен, пост виден только по прямой ссылке"
 fi
 
-# Edge nodes pick up the purge with a lag: right after it /blog/ was seen without
-# the post and with it 20 s later (13.10.2026, twice). Retry before failing.
-seen() {  # url needle
-  for _ in 1 2 3 4 5 6 7 8 9; do
-    curl -sf "$1" | grep -qF "$2" && return 0
-    sleep 10
-  done
-  return 1
-}
 seen "$live" "$title" \
-  || { echo "✗ на $live нет заголовка «$title» за 90 с" >&2; exit 5; }
+  || { echo "✗ на $live нет заголовка «$title» за $((SEEN_TRIES * 10)) с" >&2; exit 5; }
 seen "$SITE/blog/" "$slug.html" \
-  && echo "+ в ленте блога: $SITE/blog/" || { echo "✗ в $SITE/blog/ поста нет за 90 с" >&2; exit 6; }
+  && echo "+ в ленте блога: $SITE/blog/" || { echo "✗ в $SITE/blog/ поста нет за $((SEEN_TRIES * 10)) с" >&2; exit 6; }
 echo "+ published: $live"
