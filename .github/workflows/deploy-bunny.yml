@@ -55,6 +55,7 @@ jobs:
             ! -path "./.claude/*" \
             ! -path "./scripts/*" \
             ! -path "./content/*" \
+            ! -path "./issues/*" \
             ! -name "build.js" \
             ! -name "build-blog.js" \
             ! -name "CLAUDE.md" \

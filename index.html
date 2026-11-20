@@ -199,10 +199,10 @@ Peter the Great St. Petersburg Polytechnic University – Technics
 
 ## AI Assistant Setup
 
-How I work with an AI coding assistant. Nine approaches, each with what it is and why.
+How I work with an AI coding assistant. Thirteen approaches, each with what it is and why.
 
 0. Commands, not guessed words.
-What: a message without a command is talk — the assistant answers in words and every edit is refused that turn. Work opens only on /go, and the answer starts with "understood as …". /commit and /push allow exactly one commit or push within ten minutes, never by a sub-agent. /q, /iq, /redo, /stop, /fail, /win, /mem cover questions, restating, stopping and the ledgers.
+What: a message without a command is talk — the assistant answers in words and every edit is refused that turn. Work opens only on /go, and the answer starts with "understood as …". /commit and /push allow exactly one commit or push within ten minutes, never by a sub-agent. /goloop is /go that keeps going on its own pace. /q, /iq, /redo, /stop, /fail, /win, /mem cover questions, restating, stopping and the ledgers.
 Why: hooks that guessed intent from words kept misreading — a question taken for an order, a picked option for a question. A typed command is read exactly; the session's first reply lists them.
 
 1. Rules are enforced by hooks, not by memory.
@@ -214,7 +214,7 @@ What: no "done" without a run after the last edit; numbers are recounted by a sc
 Why: the most expensive mistake is the confident one. A check costs seconds; a wrong "done" costs a lost evening.
 
 3. Every slip is written down, in my words.
-What: a ledger of failures, each with the owner's verbatim reaction, grouped into classes and shown before every reply; a separate ledger of what the owner explicitly approved — a line appears only on my /win, in my words, and each one names the proof (a test with a planted break, a live run, a number), the post <a href="https://panov.id/blog/pobeda-eto-dokazatelstvo.html" target="_blank" rel="noreferrer">https://panov.id/blog/pobeda-eto-dokazatelstvo.html</a> walks through all five.
+What: a ledger of failures, each with the owner's verbatim reaction, grouped into classes and shown before every reply; a separate ledger of what the owner explicitly approved — a line appears only on my /win, in my words, and each one names the proof (a test with a planted break, a live run, a number), there are seven so far; the post <a href="https://panov.id/blog/pobeda-eto-dokazatelstvo.html" target="_blank" rel="noreferrer">https://panov.id/blog/pobeda-eto-dokazatelstvo.html</a> walks through the first five.
 Why: the same mistake comes back in a new shape. A list of my own patterns, in front of me every turn, catches the shape instead of the instance.
 
 4. A second opinion before it reaches me.
@@ -234,8 +234,24 @@ What: a generator — shared, or the project's own where its stack needs one —
 Why: searching the code anew every session is slow and misses links. A map built from the project itself and checked on every build can be read in a minute and trusted.
 
 8. Cheap work goes to cheap models; the decision stays with me.
-What: mechanical steps with a machine check go to small executor agents; noisy output is read through a 12-line digest; I am asked only about money, accounts, irreversible actions and product forks — never about technique.
+What: mechanical steps with a machine check go to small executor agents; a ready diff plan goes to a second, cheaper coding assistant run from the command line; noisy output is read through a 12-line digest; a PDF over five pages goes to a small agent, not the main model — text through a text extractor, a layout without a text layer cut into page images by a script; a token report shows where the bytes of a day went; I am asked only about money, accounts, irreversible actions and product forks — never about technique.
 Why: tokens and my attention are the two scarce resources. Everything else the assistant decides, writes down, and reports with numbers.
+
+9. Every task is a folder with ten steps that cannot be skipped.
+What: a task lives in issues/&lt;NNNN&gt;-&lt;slug&gt;/ of the repository it changes: the task and its acceptance terms, a status log, comments, and cross-repository links that each say why. Ten steps — scope, change, test, a planted break that must turn the test red, a review pass, fixes, a second review pass that must come back clean, the full suite, an audit of what was not done, acceptance — close only through a command, and a commit names the task.
+Why: a rule written in the instructions was broken the next day; a step that a command refuses to skip is not.
+
+10. The report is read from my chair, and what was not checked is named.
+What: a report of finished work starts with acceptance as the customer would do it: what I asked, verbatim; what was delivered, with evidence; what is missing; and a verdict. Before it, an auditor agent reads the code and the claims and lists every environment and path the work did not run, under "not checked".
+Why: the assistant checks what it built against what it meant; I check it against what I asked. The gap between the two is where returned work comes from.
+
+11. Ready material is taken, not retyped.
+What: whatever I hand over — an archive, a folder, a link — is listed whole before work starts; markup, styles and scripts it already holds are copied out by a script into files that say where they came from; only data is written by hand. A goal counts as reached when the result equals the material, not its screenshots.
+Why: once a full set of finished screens sat in an archive while twenty hours went into redrawing them by hand.
+
+12. Several sessions on one repository, one shared board.
+What: parallel sessions each work in their own worktree, take rows from a shared board, check each other's work and keep going without waiting for me; /stop still stops them.
+Why: one session is idle while it waits on a long run; a board turns that wait into another finished row.
 
 Everything runs locally, nothing is installed on the host outside containers, and the setup lives in ~/.claude.
     </pre>
