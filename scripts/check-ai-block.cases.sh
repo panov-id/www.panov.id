@@ -31,11 +31,18 @@ python3 -c "import sys;open(sys.argv[1],'w').write(open('README_RU.md').read().r
 RU_README="$T/ru.md" ./scripts/check-ai-block.sh >/dev/null; case_rc ru-digest $? 1
 python3 -c "import sys;open(sys.argv[1],'w').write(open('README_RU.md').read().replace('десятью шагами','девятью шагами'))" "$T/ru.md"
 RU_README="$T/ru.md" ./scripts/check-ai-block.sh >/dev/null; case_rc ru-steps $? 1
-mkdir -p "$T/c/scripts/bin"; cp -r "$HOME/.claude/commands" "$HOME/.claude/agents" "$HOME/.claude/templates" "$T/c/"; cp "$HOME/.claude/wins.md" "$T/c/"; cp "$HOME/.claude/scripts/bin/issue" "$T/c/scripts/bin/"; cp "$HOME/.claude/scripts/token-report.py" "$T/c/scripts/"
+mkdir -p "$T/c/scripts/bin"; cp -r "$HOME/.claude/commands" "$HOME/.claude/agents" "$HOME/.claude/templates" "$T/c/"; cp "$HOME/.claude/wins.md" "$T/c/"; cp "$HOME/.claude/scripts/bin/issue" "$T/c/scripts/bin/"; cp "$HOME/.claude/scripts/token-report.py" "$T/c/scripts/"; mkdir -p "$T/c/hooks" "$T/c/skills/delegate"; cp "$HOME/.claude/hooks/turn-consume.py" "$T/c/hooks/"; cp "$HOME/.claude/skills/delegate/SKILL.md" "$T/c/skills/delegate/"
 ./scripts/check-ai-block.sh README.md "$T/c" >/dev/null; case_rc tool-pdf-pages-gone $? 1
 { cat "$HOME/.claude/scripts/bin/issue"; echo '    for k in range(1, 11): pass'; } > "$T/issue2"
 ISSUE_BIN="$T/issue2" ./scripts/check-ai-block.sh >/dev/null; case_rc issue-tool-two-ranges $? 1
 sed 's/at most [0-9]* lines/at most some lines/' "$HOME/.claude/templates/project-rules.md" > "$T/c/templates/project-rules.md"; cp "$HOME/.claude/scripts/bin/pdf-pages.sh" "$T/c/scripts/bin/"
 ./scripts/check-ai-block.sh README.md "$T/c" >/dev/null; case_rc digest-rule-missing $? 1
+sed 's/^TTL = 600/TTL = 900/' "$HOME/.claude/hooks/turn-consume.py" > "$T/tc.py"
+TTL_HOOK="$T/tc.py" ./scripts/check-ai-block.sh >/dev/null; case_rc commit-window-ttl-900 $? 1
+python3 -c "import sys;open(sys.argv[1],'w').write(open('README_RU.md').read().replace('десяти минут','пятнадцати минут'))" "$T/ru.md"
+RU_README="$T/ru.md" ./scripts/check-ai-block.sh >/dev/null; case_rc ru-commit-window $? 1
+python3 -c "import sys;open(sys.argv[1],'w').write(open('README_RU.md').read().replace('PDF больше пяти страниц','PDF больше шести страниц'))" "$T/ru.md"
+RU_README="$T/ru.md" ./scripts/check-ai-block.sh >/dev/null; case_rc ru-pdf-pages $? 1
+case_rc pdf-pages "$(mut 'PDF over five pages=>PDF over six pages')" 1
 echo "cases: $pass of $total"
 [[ $pass == $total ]]

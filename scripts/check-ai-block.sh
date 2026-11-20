@@ -30,6 +30,11 @@ dl=$(grep -oE 'at most [0-9]+ lines' "$C/templates/project-rules.md" | grep -oE 
 k=$(grep -oE 'for k in range\(1, [0-9]+\)' "${ISSUE_BIN:-$C/scripts/bin/issue}" | grep -oE '[0-9]+\)$' | tr -d ')')
 if [[ -z "$k" || "$k" == *$'\n'* ]]; then echo "FAIL steps: not exactly one step range in the issue tool"; fail=1
 else k=$((k-1)); grep -qiE "${words[$k]} steps" <<<"$block" || { echo "FAIL steps: issue tool has $k"; fail=1; }; fi
+ttl=$(grep -oE '^TTL = [0-9]+' "${TTL_HOOK:-$C/hooks/turn-consume.py}" | grep -oE '[0-9]+')
+cm=$(( ${ttl:-0} / 60 )); [[ $cm -gt 0 ]] || cm=""
+[[ -n "$cm" ]] && grep -qF -- "within ${words[$cm]} minutes" <<<"$block" || { echo "FAIL commit window: hook says $cm minutes"; fail=1; }
+pp=$(grep -oE 'PDFs > [0-9]+ pages' "$C/skills/delegate/SKILL.md" | grep -oE '[0-9]+')
+[[ -n "$pp" ]] && grep -qF -- "PDF over ${words[$pp]} pages" <<<"$block" || { echo "FAIL pdf pages: delegate says $pp"; fail=1; }
 RU="${RU_README:-$(dirname "$R")/README_RU.md}"
 if [[ -f "$RU" ]]; then
   rub=$(sed -n '/^## Настройка ИИ-ассистента/,$p' "$RU")
@@ -43,6 +48,9 @@ if [[ -f "$RU" ]]; then
   grep -qF -- "сводку в ${dl} строк" <<<"$rub" || { echo "FAIL RU digest: want ${dl} строк"; fail=1; }
   rk=(ноль одним двумя тремя четырьмя пятью шестью семью восемью девятью десятью одиннадцатью двенадцатью)
   [[ -n "${k:-}" && "$k" != *$'\n'* ]] && { grep -qiF -- "${rk[$k]} шагами" <<<"$rub" || { echo "FAIL RU steps: want ${rk[$k]} шагами"; fail=1; }; }
+  rg=(ноль одной двух трёх четырёх пяти шести семи восьми девяти десяти одиннадцати двенадцати тринадцати четырнадцати пятнадцати)
+  [[ -n "$cm" ]] && { grep -qF -- "${rg[$cm]} минут" <<<"$rub" || { echo "FAIL RU commit window: want ${rg[$cm]} минут"; fail=1; }; }
+  [[ -n "$pp" ]] && { grep -qF -- "PDF больше ${rg[$pp]} страниц" <<<"$rub" || { echo "FAIL RU pdf pages: want ${rg[$pp]}"; fail=1; }; }
   rw=(ноль одно два три четыре пять шесть семь восемь девять десять одиннадцать двенадцать тринадцать четырнадцать пятнадцать)
   (( wins < ${#rw[@]} && n < ${#ruw[@]} )) || { echo "FAIL word table too short: wins=$wins items=$n, extend rw/ruw/words"; exit 1; }
   grep -qE "пока их ${rw[$wins]}[;,. ]" <<<"$rub" || { echo "FAIL RU wins: want ${rw[$wins]}"; fail=1; }

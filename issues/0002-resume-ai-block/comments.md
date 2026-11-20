@@ -37,3 +37,6 @@ step 10 closed: acceptance filled RU/EN: verdict would return, waits /commit /pu
 
 ## 2026-11-20 14:44 · claude
 Owner picked «Снимаю правило 22» in the questionnaire; hook phase-during.py still refused, so the owner added the line himself: deploy-bunny.yml:58 excludes issues/ [#18]. Final: 15 of 15 cases [#19], index.html equals the build [#20], commit a31f11b pushed. Step 3 evidence is stale: without ~/.claude the check exits 2 (NOT CHECKED), not 0. RU check now also covers digest lines and steps: 17 of 17 [#23].
+
+## 2026-11-20 15:04 · claude
+Correction to the 13:47 note: the gate is live now (site is in ~/.claude/trusted-projects.txt:9); gates-run fired at 14:44 with lint-brands rc=0 and check-ai-block.cases rc=0. Check now also covers the /commit window (guard-commit.sh) and the PDF page limit (delegate skill): cases 19 of 19.
