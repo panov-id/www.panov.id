@@ -27,6 +27,10 @@ python3 -c "import sys,re;open(sys.argv[1],'w').write(re.sub(r'\n\*\*12\. .*?(?=
 RU_README="$T/ru.md" ./scripts/check-ai-block.sh >/dev/null; case_rc ru-item-missing $? 1
 python3 -c "import sys;open(sys.argv[1],'w').write(open('README_RU.md').read().replace('Тринадцать подходов','Восемьтринадцать подходов'))" "$T/ru.md"
 RU_README="$T/ru.md" ./scripts/check-ai-block.sh >/dev/null; case_rc ru-approaches-substring $? 1
+python3 -c "import sys;open(sys.argv[1],'w').write(open('README_RU.md').read().replace('сводку в 12 строк','сводку в 10 строк'))" "$T/ru.md"
+RU_README="$T/ru.md" ./scripts/check-ai-block.sh >/dev/null; case_rc ru-digest $? 1
+python3 -c "import sys;open(sys.argv[1],'w').write(open('README_RU.md').read().replace('десятью шагами','девятью шагами'))" "$T/ru.md"
+RU_README="$T/ru.md" ./scripts/check-ai-block.sh >/dev/null; case_rc ru-steps $? 1
 mkdir -p "$T/c/scripts/bin"; cp -r "$HOME/.claude/commands" "$HOME/.claude/agents" "$HOME/.claude/templates" "$T/c/"; cp "$HOME/.claude/wins.md" "$T/c/"; cp "$HOME/.claude/scripts/bin/issue" "$T/c/scripts/bin/"; cp "$HOME/.claude/scripts/token-report.py" "$T/c/scripts/"
 ./scripts/check-ai-block.sh README.md "$T/c" >/dev/null; case_rc tool-pdf-pages-gone $? 1
 { cat "$HOME/.claude/scripts/bin/issue"; echo '    for k in range(1, 11): pass'; } > "$T/issue2"

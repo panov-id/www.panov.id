@@ -40,6 +40,9 @@ if [[ -f "$RU" ]]; then
   for f in "$C"/commands/*.md; do
     c="/$(basename "$f" .md)"; grep -qF "\`$c\`" <<<"$rub" || { echo "FAIL RU command $c"; fail=1; }
   done
+  grep -qF -- "сводку в ${dl} строк" <<<"$rub" || { echo "FAIL RU digest: want ${dl} строк"; fail=1; }
+  rk=(ноль одним двумя тремя четырьмя пятью шестью семью восемью девятью десятью одиннадцатью двенадцатью)
+  [[ -n "${k:-}" && "$k" != *$'\n'* ]] && { grep -qiF -- "${rk[$k]} шагами" <<<"$rub" || { echo "FAIL RU steps: want ${rk[$k]} шагами"; fail=1; }; }
   rw=(ноль одно два три четыре пять шесть семь восемь девять десять одиннадцать двенадцать тринадцать четырнадцать пятнадцать)
   (( wins < ${#rw[@]} && n < ${#ruw[@]} )) || { echo "FAIL word table too short: wins=$wins items=$n, extend rw/ruw/words"; exit 1; }
   grep -qE "пока их ${rw[$wins]}[;,. ]" <<<"$rub" || { echo "FAIL RU wins: want ${rw[$wins]}"; fail=1; }
